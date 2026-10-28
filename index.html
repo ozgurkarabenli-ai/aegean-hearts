@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#0284c7">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="./manifest.json">
   <title>Aegean Hearts — Türk & Yunan Flört ve Seyahat Platformu</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
@@ -357,14 +357,7 @@
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-3">
                 <div class="w-16 h-16 rounded-2xl overflow-hidden shadow border-2 border-sky-500 relative shrink-0 cursor-pointer" onclick="previewMyCard()">
-                  <svg viewBox="0 0 100 100" class="w-full h-full">
-                    <rect width="100" height="100" fill="#0284c7"/>
-                    <circle cx="80" cy="22" r="12" fill="#fde047"/>
-                    <path d="M0 75 Q50 65 100 75 L100 100 L0 100 Z" fill="#0369a1"/>
-                    <circle cx="50" cy="42" r="16" fill="#fed7aa"/>
-                    <path d="M34 36 Q50 20 66 36" fill="#1e293b"/>
-                    <path d="M26 95 Q50 65 74 95" fill="#ffffff"/>
-                  </svg>
+                  <img src="./assets/profile_ege_32.jpg" alt="Profil Fotoğrafım" class="w-full h-full object-cover" />
                   <span class="absolute bottom-0.5 right-0.5 bg-emerald-500 text-white text-xs font-bold px-1 rounded-full">✓</span>
                 </div>
                 <div>
@@ -407,19 +400,19 @@
               <!-- 5-Column Media Grid: 4 Photos + 1 Short Video + Add Buttons -->
               <div class="grid grid-cols-5 gap-1.5">
                 <button onclick="openPhotoPreviewModal(0)" class="rounded-xl overflow-hidden relative border-2 border-sky-500 shadow" style="height: 64px;">
-                  <svg viewBox="0 0 120 120" class="w-full h-full"><rect width="120" height="120" fill="#0284c7"/><circle cx="90" cy="28" r="18" fill="#fbbf24"/><circle cx="60" cy="48" r="18" fill="#fdba74"/><path d="M32 120 Q60 78 88 120" fill="#f8fafc"/></svg>
+                  <img src="./assets/profile_ege_32.jpg" alt="1. Foto" class="w-full h-full object-cover" />
                   <span class="absolute bottom-0 inset-x-0 bg-black/65 text-white text-xs py-0.5 text-center font-semibold">1. Foto</span>
                 </button>
                 <button onclick="openPhotoPreviewModal(1)" class="rounded-xl overflow-hidden relative border border-[var(--border)] shadow" style="height: 64px;">
-                  <svg viewBox="0 0 120 120" class="w-full h-full"><rect width="120" height="120" fill="#0ea5e9"/><path d="M65 20 L65 80 L25 80 Z" fill="#ffffff"/><path d="M20 84 L105 84 L92 98 L32 98 Z" fill="#b45309"/></svg>
+                  <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=300&q=80" alt="2. Foto" class="w-full h-full object-cover" />
                   <span class="absolute bottom-0 inset-x-0 bg-black/65 text-white text-xs py-0.5 text-center font-semibold">2. Foto</span>
                 </button>
                 <button onclick="openPhotoPreviewModal(2)" class="rounded-xl overflow-hidden relative border border-[var(--border)] shadow" style="height: 64px;">
-                  <svg viewBox="0 0 120 120" class="w-full h-full"><rect width="120" height="120" fill="#4f46e5"/><rect x="15" y="55" width="40" height="65" fill="#f8fafc"/><circle cx="85" cy="45" r="18" fill="#ec4899"/></svg>
+                  <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=300&q=80" alt="3. Foto" class="w-full h-full object-cover" />
                   <span class="absolute bottom-0 inset-x-0 bg-black/65 text-white text-xs py-0.5 text-center font-semibold">3. Foto</span>
                 </button>
                 <button onclick="openPhotoPreviewModal(3)" class="rounded-xl overflow-hidden relative border border-[var(--border)] shadow" style="height: 64px;">
-                  <svg viewBox="0 0 120 120" class="w-full h-full"><rect width="120" height="120" fill="#1e1b4b"/><ellipse cx="60" cy="95" rx="45" ry="18" fill="#38bdf8"/></svg>
+                  <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=80" alt="4. Foto" class="w-full h-full object-cover" />
                   <span class="absolute bottom-0 inset-x-0 bg-black/65 text-white text-xs py-0.5 text-center font-semibold">4. Foto</span>
                 </button>
                 <!-- Short Video Slot -->
@@ -744,20 +737,20 @@
   <script>
     const myProfilePhotos = [
       {
-        caption: "1/4 • Çeşme Marina Gün Batımı",
-        svg: `<svg viewBox="0 0 400 280" class="w-full h-full"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0284c7"/><stop offset="55%" stop-color="#1d4ed8"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient></defs><rect width="400" height="280" fill="url(#g1)"/><circle cx="315" cy="70" r="42" fill="#fde047" opacity="0.9"/><path d="M0 205 Q130 180 260 205 T400 195 L400 280 L0 280 Z" fill="#0369a1"/><circle cx="200" cy="115" r="38" fill="#fdba74"/><path d="M162 102 Q200 62 238 102" fill="#1e293b"/><rect x="172" y="106" width="24" height="12" rx="4" fill="#0f172a"/><rect x="204" y="106" width="24" height="12" rx="4" fill="#0f172a"/><path d="M130 280 Q200 165 270 280" fill="#ffffff"/></svg>`
+        caption: "1/4 • Çeşme Marina Gün Batımı (AI Portre)",
+        svg: `<img src="./assets/profile_ege_32.jpg" alt="Çeşme Marina Portre" class="w-full h-full object-cover object-top" />`
       },
       {
-        caption: "2/4 • Ege'de Yelken Keyfi",
-        svg: `<svg viewBox="0 0 400 280" class="w-full h-full"><rect width="400" height="280" fill="#0ea5e9"/><circle cx="80" cy="55" r="30" fill="#fef08a"/><path d="M210 45 L210 190 L115 190 Z" fill="#ffffff"/><path d="M220 65 L220 190 L295 190 Z" fill="#f1f5f9"/><path d="M100 198 L310 198 L280 230 L130 230 Z" fill="#b45309"/><path d="M0 220 Q120 195 240 220 T400 215 L400 280 L0 280 Z" fill="#0369a1"/></svg>`
+        caption: "2/4 • Ege'de Turkuaz Koy & Deniz Keyfi",
+        svg: `<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85" alt="Ege Denizi" class="w-full h-full object-cover" />`
       },
       {
-        caption: "3/4 • Babaannemin Memleketi Rodos Sokakları",
-        svg: `<svg viewBox="0 0 400 280" class="w-full h-full"><rect width="400" height="280" fill="#4338ca"/><rect x="40" y="90" width="130" height="190" fill="#f8fafc"/><rect x="75" y="135" width="45" height="65" rx="22" fill="#0284c7"/><rect x="200" y="75" width="155" height="205" fill="#fef3c7"/><circle cx="195" cy="85" r="35" fill="#ec4899"/><circle cx="240" cy="70" r="30" fill="#db2777"/></svg>`
+        caption: "3/4 • Babaannemin Memleketi Rodos & Ege Sokakları",
+        svg: `<img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=900&q=85" alt="Ege Sokakları" class="w-full h-full object-cover" />`
       },
       {
         caption: "4/4 • Alaçatı & Sakız Taverna Akşamı",
-        svg: `<svg viewBox="0 0 400 280" class="w-full h-full"><rect width="400" height="280" fill="#1e1b4b"/><circle cx="70" cy="48" r="8" fill="#fde047"/><circle cx="150" cy="58" r="8" fill="#fde047"/><circle cx="235" cy="58" r="8" fill="#fde047"/><circle cx="320" cy="46" r="8" fill="#fde047"/><ellipse cx="200" cy="230" rx="140" ry="42" fill="#38bdf8"/></svg>`
+        svg: `<img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=85" alt="Taverna Akşamı" class="w-full h-full object-cover" />`
       }
     ];
 
@@ -781,14 +774,14 @@
         badges: ["🚗 Arabayla 40 Dk", "🛂 Sınır Komşusu", "💘 Flört & Hafta Sonu"],
         song: "Thodoris Ferris — Mataia",
         photoCaptions: [
-          "1/3 • Maria — Alexandroupoli Sahil Yürüyüşü",
-          "2/3 • Tarihi Alexandroupoli Deniz Feneri & Gün Batımı",
+          "1/3 • Maria — Alexandroupoli (Dedeağaç) Sahili & Deniz Feneri",
+          "2/3 • Dedeağaç Sahilinde Gün Batımı",
           "3/3 • Dedeağaç Sahil Tavernası — Beyaz Şarap & Deniz Ürünleri"
         ],
         photos: [
-          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><defs><linearGradient id="mg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4f46e5"/><stop offset="50%" stop-color="#0284c7"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient></defs><rect width="400" height="350" fill="url(#mg1)"/><circle cx="320" cy="65" r="42" fill="#fde047" opacity="0.9"/><path d="M0 250 Q120 225 260 250 T400 240 L400 350 L0 350 Z" fill="#0369a1"/><rect x="65" y="130" width="24" height="120" fill="#ffffff"/><polygon points="60,130 94,130 77,98" fill="#ef4444"/><circle cx="215" cy="135" r="46" fill="#fed7aa"/><path d="M167 135 Q215 62 263 135" fill="#451a03"/><circle cx="198" cy="130" r="4.5" fill="#1e293b"/><circle cx="232" cy="130" r="4.5" fill="#1e293b"/><path d="M200 152 Q215 162 230 152" stroke="#e11d48" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M135 350 Q215 195 295 350" fill="#f43f5e"/></svg>`,
-          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><defs><linearGradient id="mg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f97316"/><stop offset="55%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#0c4a6e"/></linearGradient></defs><rect width="400" height="350" fill="url(#mg2)"/><circle cx="200" cy="155" r="55" fill="#fde047" opacity="0.85"/><path d="M0 245 Q200 225 400 245 L400 350 L0 350 Z" fill="#075985"/><rect x="182" y="95" width="36" height="150" fill="#f8fafc"/><rect x="176" y="88" width="48" height="12" fill="#dc2626"/><polygon points="180,88 220,88 200,62" fill="#dc2626"/><circle cx="200" cy="78" r="8" fill="#fef08a"/></svg>`,
-          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><rect width="400" height="350" fill="#0f172a"/><path d="M0 45 Q200 95 400 40" stroke="#fbbf24" stroke-width="2.5" fill="none"/><circle cx="70" cy="54" r="9" fill="#fde047"/><circle cx="155" cy="66" r="9" fill="#fde047"/><circle cx="245" cy="66" r="9" fill="#fde047"/><circle cx="330" cy="52" r="9" fill="#fde047"/><path d="M0 215 Q200 200 400 215 L400 350 L0 350 Z" fill="#0369a1"/><ellipse cx="200" cy="275" rx="150" ry="52" fill="#38bdf8"/><circle cx="170" cy="270" r="28" fill="#ffffff"/><circle cx="170" cy="270" r="20" fill="#f97316"/><rect x="235" y="210" width="22" height="52" rx="6" fill="#fef08a" opacity="0.9"/><rect x="268" y="218" width="18" height="44" rx="5" fill="#ffffff" opacity="0.9"/></svg>`
+          `<img src="./assets/profile_maria_28.jpg" alt="Maria, 28" class="w-full h-full object-cover object-top" />`,
+          `<img src="https://images.unsplash.com/photo-1495954484750-af469f2f9be5?auto=format&fit=crop&w=900&q=85" alt="Gün Batımı" class="w-full h-full object-cover" />`,
+          `<img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=900&q=85" alt="Deniz Ürünleri" class="w-full h-full object-cover" />`
         ]
       },
       {
@@ -810,14 +803,14 @@
         badges: ["⛴️ Rodos & Sakız", "⛵ Yelken & Gastronomi", "🌿 Urla/İzmir Kökü"],
         song: "Haris Alexiou — To Tango Tis Nefelis",
         photoCaptions: [
-          "1/3 • Sofia — Rodos Limanı Gün Batımı",
-          "2/3 • Rodos Eski Şehir (Old Town) & Begonviller",
-          "3/3 • Sakız & Rodos Yelken Turu"
+          "1/3 • Sofia — Rodos Taş Teras & Begonviller",
+          "2/3 • Rodos & Ege Mimarisinde Akşamüstü",
+          "3/3 • Rodos Mum Işığında Akşam Yemeği"
         ],
         photos: [
-          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><defs><linearGradient id="sg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0284c7"/><stop offset="50%" stop-color="#6d28d9"/><stop offset="100%" stop-color="#d97706"/></linearGradient></defs><rect width="400" height="350" fill="url(#sg1)"/><circle cx="310" cy="65" r="42" fill="#fde047"/><circle cx="200" cy="135" r="46" fill="#fed7aa"/><path d="M152 135 Q200 58 248 135" fill="#78350f"/><circle cx="184" cy="130" r="4.5" fill="#1e293b"/><circle cx="216" cy="130" r="4.5" fill="#1e293b"/><path d="M186 150 Q200 160 214 150" stroke="#e11d48" stroke-width="3.5" fill="none"/><path d="M125 350 Q200 195 275 350" fill="#fbbf24"/></svg>`,
-          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><rect width="400" height="350" fill="#4338ca"/><rect x="35" y="100" width="140" height="250" fill="#fef3c7"/><rect x="75" y="160" width="55" height="90" rx="27" fill="#0284c7"/><rect x="200" y="80" width="165" height="270" fill="#fde68a"/><circle cx="195" cy="95" r="45" fill="#ec4899"/><circle cx="250" cy="80" r="38" fill="#db2777"/><circle cx="145" cy="110" r="32" fill="#f472b6"/></svg>`,
-          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><rect width="400" height="350" fill="#0ea5e9"/><circle cx="85" cy="65" r="36" fill="#fef08a"/><path d="M210 55 L210 230 L105 230 Z" fill="#ffffff"/><path d="M222 80 L222 230 L310 230 Z" fill="#f1f5f9"/><path d="M90 238 L325 238 L290 275 L125 275 Z" fill="#b45309"/><path d="M0 265 Q120 240 240 265 T400 255 L400 350 L0 350 Z" fill="#0369a1"/></svg>`
+          `<img src="./assets/profile_sofia_44.jpg" alt="Sofia, 44" class="w-full h-full object-cover object-top" />`,
+          `<img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=900&q=85" alt="Rodos" class="w-full h-full object-cover" />`,
+          `<img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=85" alt="Romantik Akşam" class="w-full h-full object-cover" />`
         ]
       },
       {
@@ -839,14 +832,14 @@
         badges: ["🌟 50-60+ Seçkin Kulüp", "🏛️ Kültür & Sanat", "🌿 Ayvalık & İstanbul Kökü"],
         song: "Mikis Theodorakis — Strose To Stroma Sou",
         photoCaptions: [
-          "1/3 • Katerina — Atina Plaka'da Akşamüstü",
-          "2/3 • Midilli - Ayvalık Yelken Seyri",
-          "3/3 • Akropolis & Ege Sanat Galerisi"
+          "1/3 • Katerina — Midilli Limanı & Ege Kıyısı",
+          "2/3 • Midilli - Ayvalık Sahil Sofrası",
+          "3/3 • Ege Kıyısında Güneşli Gün"
         ],
         photos: [
-          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><defs><linearGradient id="kg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1e3a8a"/><stop offset="50%" stop-color="#0284c7"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient></defs><rect width="400" height="350" fill="url(#kg1)"/><circle cx="310" cy="65" r="42" fill="#fde047"/><circle cx="200" cy="135" r="46" fill="#fed7aa"/><path d="M152 135 Q200 58 248 135" fill="#d97706"/><circle cx="184" cy="130" r="4.5" fill="#1e293b"/><circle cx="216" cy="130" r="4.5" fill="#1e293b"/><path d="M186 150 Q200 160 214 150" stroke="#e11d48" stroke-width="3.5" fill="none"/><path d="M125 350 Q200 195 275 350" fill="#f8fafc"/></svg>`,
-          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><rect width="400" height="350" fill="#0369a1"/><circle cx="300" cy="70" r="40" fill="#fde047"/><path d="M200 60 L200 230 L100 230 Z" fill="#ffffff"/><path d="M212 85 L212 230 L300 230 Z" fill="#e2e8f0"/><path d="M85 238 L315 238 L285 275 L115 275 Z" fill="#92400e"/></svg>`,
-          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><rect width="400" height="350" fill="#312e81"/><circle cx="90" cy="70" r="35" fill="#fef08a"/><polygon points="80,150 320,150 200,95" fill="#f8fafc"/><rect x="95" y="150" width="18" height="110" fill="#e2e8f0"/><rect x="145" y="150" width="18" height="110" fill="#e2e8f0"/><rect x="195" y="150" width="18" height="110" fill="#e2e8f0"/><rect x="245" y="150" width="18" height="110" fill="#e2e8f0"/><rect x="290" y="150" width="18" height="110" fill="#e2e8f0"/><rect x="75" y="260" width="250" height="25" fill="#cbd5e1"/></svg>`
+          `<img src="./assets/profile_katerina_58.jpg" alt="Katerina, 58" class="w-full h-full object-cover object-top" />`,
+          `<img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=85" alt="Sahil Sofrası" class="w-full h-full object-cover" />`,
+          `<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85" alt="Ege Kıyısı" class="w-full h-full object-cover" />`
         ]
       },
       {
@@ -869,13 +862,13 @@
         song: "Yeni Türkü & Haris Alexiou — Olmasa Mektubun",
         photoCaptions: [
           "1/3 • Defne — Bodrum Marina Gün Batımı",
-          "2/3 • Kos & Rodos Feribot Güvertesi",
-          "3/3 • Ege Mezeleri & Rebetiko Akşamı"
+          "2/3 • Akdeniz Deniz Ürünleri & Gastronomi",
+          "3/3 • Ege'de Panayır & Festival Akşamı"
         ],
         photos: [
-          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><defs><linearGradient id="dg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#059669"/><stop offset="50%" stop-color="#0284c7"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient></defs><rect width="400" height="350" fill="url(#dg1)"/><circle cx="90" cy="65" r="40" fill="#fde047" opacity="0.9"/><circle cx="200" cy="135" r="46" fill="#fed7aa"/><path d="M152 135 Q200 58 248 135" fill="#78350f"/><circle cx="184" cy="130" r="4.5" fill="#1e293b"/><circle cx="216" cy="130" r="4.5" fill="#1e293b"/><path d="M186 150 Q200 160 214 150" stroke="#e11d48" stroke-width="3.5" fill="none"/><path d="M125 350 Q200 195 275 350" fill="#ec4899"/></svg>`,
-          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><rect width="400" height="350" fill="#0284c7"/><circle cx="310" cy="65" r="38" fill="#fde047"/><path d="M200 60 L200 230 L100 230 Z" fill="#ffffff"/><path d="M85 238 L315 238 L285 275 L115 275 Z" fill="#b45309"/></svg>`,
-          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><rect width="400" height="350" fill="#1e1b4b"/><circle cx="80" cy="55" r="9" fill="#fde047"/><circle cx="200" cy="65" r="9" fill="#fde047"/><circle cx="320" cy="55" r="9" fill="#fde047"/><ellipse cx="200" cy="265" rx="145" ry="48" fill="#38bdf8"/></svg>`
+          `<img src="./assets/profile_defne_39.jpg" alt="Defne, 39" class="w-full h-full object-cover object-top" />`,
+          `<img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=900&q=85" alt="Gastronomi" class="w-full h-full object-cover" />`,
+          `<img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=900&q=85" alt="Festival Akşamı" class="w-full h-full object-cover" />`
         ]
       }
     ];
