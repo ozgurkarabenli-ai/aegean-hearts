@@ -38,7 +38,7 @@
     <div class="w-full max-w-[420px] mx-auto lg:mx-0 bg-[var(--card)] border-2 border-[var(--border)] rounded-[36px] shadow-2xl overflow-hidden flex flex-col relative" style="height: 850px;">
 
       <!-- DYNAMIC AMBIENT BACKGROUND WALLPAPER LAYER -->
-      <div id="appBackgroundLayer" class="absolute inset-0 pointer-events-none z-0 opacity-35 transition-all duration-500"></div>
+      <div id="appBackgroundLayer" class="absolute inset-0 pointer-events-none z-0 opacity-60 transition-all duration-500"></div>
 
       <!-- PWA Top Status & Header Bar -->
       <div id="appHeaderBar" class="relative z-10 bg-gradient-to-r from-sky-700 via-blue-600 to-cyan-600 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500">
@@ -649,53 +649,53 @@
           Kullanıcılar o anki ruh hallerine göre uygulamanın arka planını ve üst bar atmosferini değiştirebilirler. Telefonda üst bardaki <strong>"🎨 Tema"</strong> butonundan veya aşağıdaki 8 konseptten birine tıklayarak canlı deneyebilirsin:
         </p>
 
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
-          <button onclick="setAppBackground('sunset_beach')" id="bgBtn-sunset_beach" class="bg-theme-btn border-2 border-amber-500 bg-amber-500/10 rounded-xl p-2.5 text-left transition">
-            <div class="text-lg">🌅</div>
-            <div class="font-bold text-xs mt-1">Günbatımı Plaj</div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
+          <button onclick="setAppBackground('sunset_beach')" id="bgBtn-sunset_beach" class="bg-theme-btn border-2 border-amber-500 bg-amber-500/10 rounded-xl p-2 text-left transition overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1495954484750-af469f2f9be5?auto=format&fit=crop&w=400&q=80" alt="Günbatımı Plaj" class="w-full h-16 object-cover rounded-lg mb-1.5 shadow-sm" />
+            <div class="font-bold text-xs">🌅 Günbatımı Plaj</div>
             <div class="text-xs text-[var(--muted-foreground)]">Romantik sahil</div>
           </button>
 
-          <button onclick="setAppBackground('sunny_beach')" id="bgBtn-sunny_beach" class="bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2.5 text-left transition">
-            <div class="text-lg">🏖️</div>
-            <div class="font-bold text-xs mt-1">Güneşli Plaj</div>
+          <button onclick="setAppBackground('sunny_beach')" id="bgBtn-sunny_beach" class="bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2 text-left transition overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80" alt="Güneşli Plaj" class="w-full h-16 object-cover rounded-lg mb-1.5 shadow-sm" />
+            <div class="font-bold text-xs">🏖️ Güneşli Plaj</div>
             <div class="text-xs text-[var(--muted-foreground)]">Turkuaz deniz</div>
           </button>
 
-          <button onclick="setAppBackground('taverna')" id="bgBtn-taverna" class="bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2.5 text-left transition">
-            <div class="text-lg">🏛️</div>
-            <div class="font-bold text-xs mt-1">Taverna Sofrası</div>
-            <div class="text-xs text-[var(--muted-foreground)]">Mavi-beyaz masa</div>
+          <button onclick="setAppBackground('taverna')" id="bgBtn-taverna" class="bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2 text-left transition overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=400&q=80" alt="Taverna Sofrası" class="w-full h-16 object-cover rounded-lg mb-1.5 shadow-sm" />
+            <div class="font-bold text-xs">🏛️ Taverna Sofrası</div>
+            <div class="text-xs text-[var(--muted-foreground)]">Mavi-beyaz Ege</div>
           </button>
 
-          <button onclick="setAppBackground('panigiri')" id="bgBtn-panigiri" class="bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2.5 text-left transition">
-            <div class="text-lg">💃</div>
-            <div class="font-bold text-xs mt-1">Panayır & Dans</div>
+          <button onclick="setAppBackground('panigiri')" id="bgBtn-panigiri" class="bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2 text-left transition overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=400&q=80" alt="Panayır & Dans" class="w-full h-16 object-cover rounded-lg mb-1.5 shadow-sm" />
+            <div class="font-bold text-xs">💃 Panayır & Dans</div>
             <div class="text-xs text-[var(--muted-foreground)]">Dans eden insanlar</div>
           </button>
 
-          <button onclick="setAppBackground('romantic_dinner')" id="bgBtn-romantic_dinner" class="bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2.5 text-left transition">
-            <div class="text-lg">🕯️</div>
-            <div class="font-bold text-xs mt-1">Romantik Yemek</div>
+          <button onclick="setAppBackground('romantic_dinner')" id="bgBtn-romantic_dinner" class="bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2 text-left transition overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=400&q=80" alt="Romantik Yemek" class="w-full h-16 object-cover rounded-lg mb-1.5 shadow-sm" />
+            <div class="font-bold text-xs">🕯️ Romantik Yemek</div>
             <div class="text-xs text-[var(--muted-foreground)]">Mum ışığı & şarap</div>
           </button>
 
-          <button onclick="setAppBackground('seafood_salad')" id="bgBtn-seafood_salad" class="bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2.5 text-left transition">
-            <div class="text-lg">🥗</div>
-            <div class="font-bold text-xs mt-1">Deniz Ürünleri Salata</div>
-            <div class="text-xs text-[var(--muted-foreground)]">Kalamar, karides, limon</div>
+          <button onclick="setAppBackground('seafood_salad')" id="bgBtn-seafood_salad" class="bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2 text-left transition overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=400&q=80" alt="Deniz Ürünleri Salata" class="w-full h-16 object-cover rounded-lg mb-1.5 shadow-sm" />
+            <div class="font-bold text-xs">🥗 Deniz Salatası</div>
+            <div class="text-xs text-[var(--muted-foreground)]">Akdeniz yeşillikleri</div>
           </button>
 
-          <button onclick="setAppBackground('raki_table')" id="bgBtn-raki_table" class="bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2.5 text-left transition">
-            <div class="text-lg">🥃</div>
-            <div class="font-bold text-xs mt-1">Rakı & Ouzo Sofrası</div>
-            <div class="text-xs text-[var(--muted-foreground)]">Buzlu kadeh & kavun</div>
+          <button onclick="setAppBackground('raki_table')" id="bgBtn-raki_table" class="bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2 text-left transition overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=400&q=80" alt="Rakı & Ouzo Sofrası" class="w-full h-16 object-cover rounded-lg mb-1.5 shadow-sm" />
+            <div class="font-bold text-xs">🥃 Rakı & Ouzo</div>
+            <div class="text-xs text-[var(--muted-foreground)]">Meze & dost sofrası</div>
           </button>
 
-          <button onclick="setAppBackground('fish_feast')" id="bgBtn-fish_feast" class="bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2.5 text-left transition">
-            <div class="text-lg">🐟</div>
-            <div class="font-bold text-xs mt-1">Balık Yemekleri</div>
-            <div class="text-xs text-[var(--muted-foreground)]">Izgara çipura & meze</div>
+          <button onclick="setAppBackground('fish_feast')" id="bgBtn-fish_feast" class="bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2 text-left transition overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=400&q=80" alt="Balık Yemekleri" class="w-full h-16 object-cover rounded-lg mb-1.5 shadow-sm" />
+            <div class="font-bold text-xs">🐟 Balık Yemekleri</div>
+            <div class="text-xs text-[var(--muted-foreground)]">Izgara balık & limon</div>
           </button>
         </div>
       </div>
@@ -1179,175 +1179,55 @@
       modal.classList.remove("hidden");
     }
 
-    // ==================== 8 CUSTOM APP BACKGROUND ATMOSPHERE THEMES ====================
+    // ==================== 8 CUSTOM APP BACKGROUND ATMOSPHERE THEMES (REAL PHOTOS) ====================
     const appBackgroundThemes = {
       sunset_beach: {
         name: "🌅 Günbatımında Romantik Plaj",
         short: "Günbatımı",
-        headerClass: "relative z-10 bg-gradient-to-r from-rose-700 via-orange-600 to-amber-500 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500",
-        svg: `<svg viewBox="0 0 420 850" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
-          <defs>
-            <linearGradient id="bgSunset" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#881337"/>
-              <stop offset="40%" stop-color="#ea580c"/>
-              <stop offset="65%" stop-color="#fbbf24"/>
-              <stop offset="66%" stop-color="#0369a1"/>
-              <stop offset="100%" stop-color="#fde68a"/>
-            </linearGradient>
-          </defs>
-          <rect width="420" height="850" fill="url(#bgSunset)"/>
-          <circle cx="210" cy="490" r="85" fill="#fef08a" opacity="0.9"/>
-          <!-- Sun reflection on sea -->
-          <ellipse cx="210" cy="595" rx="65" ry="8" fill="#fef08a" opacity="0.7"/>
-          <ellipse cx="210" cy="625" rx="45" ry="6" fill="#fde047" opacity="0.6"/>
-          <!-- Sandy Beach Shore -->
-          <path d="M0 680 Q210 640 420 690 L420 850 L0 850 Z" fill="#fcd34d"/>
-          <!-- Beach Umbrella & Two Loungers -->
-          <line x1="110" y1="740" x2="135" y2="610" stroke="#78350f" stroke-width="6"/>
-          <path d="M60 620 Q135 555 210 620 Z" fill="#e11d48"/>
-          <rect x="135" y="725" width="55" height="14" rx="4" fill="#ffffff"/>
-          <rect x="205" y="725" width="55" height="14" rx="4" fill="#ffffff"/>
-        </svg>`
+        imageUrl: "https://images.unsplash.com/photo-1495954484750-af469f2f9be5?auto=format&fit=crop&w=900&q=85",
+        headerClass: "relative z-10 bg-gradient-to-r from-rose-700 via-orange-600 to-amber-500 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500"
       },
       sunny_beach: {
         name: "🏖️ Güneşli Turkuaz Plaj",
         short: "Güneşli Plaj",
-        headerClass: "relative z-10 bg-gradient-to-r from-sky-500 via-cyan-500 to-teal-400 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500",
-        svg: `<svg viewBox="0 0 420 850" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
-          <rect width="420" height="520" fill="#38bdf8"/>
-          <circle cx="330" cy="140" r="65" fill="#fef08a"/>
-          <rect y="500" width="420" height="190" fill="#06b6d4"/>
-          <path d="M0 670 Q210 640 420 680 L420 850 L0 850 Z" fill="#fef3c7"/>
-          <!-- Blue & White Striped Aegean Umbrella -->
-          <line x1="290" y1="760" x2="275" y2="600" stroke="#92400e" stroke-width="6"/>
-          <path d="M200 615 Q275 545 350 615 Z" fill="#0284c7"/>
-          <!-- Sailboat on Horizon -->
-          <polygon points="110,430 110,495 75,495" fill="#ffffff"/>
-          <polygon points="116,445 116,495 142,495" fill="#f1f5f9"/>
-        </svg>`
+        imageUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85",
+        headerClass: "relative z-10 bg-gradient-to-r from-sky-500 via-cyan-500 to-teal-400 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500"
       },
       taverna: {
         name: "🏛️ Ege Taverna Sofrası",
         short: "Taverna",
-        headerClass: "relative z-10 bg-gradient-to-r from-blue-800 via-sky-700 to-indigo-700 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500",
-        svg: `<svg viewBox="0 0 420 850" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
-          <rect width="420" height="850" fill="#1e3a8a"/>
-          <!-- Whitewashed wall & Bougainvillea -->
-          <rect x="0" y="120" width="420" height="450" fill="#f8fafc"/>
-          <circle cx="80" cy="140" r="65" fill="#ec4899"/>
-          <circle cx="170" cy="120" r="55" fill="#db2777"/>
-          <circle cx="340" cy="145" r="70" fill="#ec4899"/>
-          <!-- Blue Window Shutters -->
-          <rect x="145" y="230" width="130" height="180" rx="12" fill="#0284c7"/>
-          <!-- Blue & White Checkered Tablecloth -->
-          <ellipse cx="210" cy="700" rx="195" ry="110" fill="#38bdf8"/>
-          <ellipse cx="210" cy="700" rx="165" ry="88" fill="#ffffff"/>
-          <circle cx="150" cy="690" r="32" fill="#fde047"/>
-          <circle cx="265" cy="705" r="36" fill="#ef4444"/>
-        </svg>`
+        imageUrl: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=900&q=85",
+        headerClass: "relative z-10 bg-gradient-to-r from-blue-800 via-sky-700 to-indigo-700 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500"
       },
       panigiri: {
         name: "💃 Panayır Eğlencesi & Dans Eden İnsanlar",
         short: "Panayır & Dans",
-        headerClass: "relative z-10 bg-gradient-to-r from-purple-800 via-fuchsia-700 to-amber-500 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500",
-        svg: `<svg viewBox="0 0 420 850" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
-          <rect width="420" height="850" fill="#1e1b4b"/>
-          <!-- Festive Panigiri Fairy Lights -->
-          <path d="M0 150 Q210 240 420 140" stroke="#fbbf24" stroke-width="3" fill="none"/>
-          <path d="M0 230 Q210 310 420 220" stroke="#fbbf24" stroke-width="3" fill="none"/>
-          <circle cx="60" cy="168" r="10" fill="#fde047"/>
-          <circle cx="135" cy="186" r="10" fill="#f43f5e"/>
-          <circle cx="210" cy="192" r="10" fill="#fde047"/>
-          <circle cx="285" cy="184" r="10" fill="#38bdf8"/>
-          <circle cx="360" cy="162" r="10" fill="#fde047"/>
-          <!-- Dancing People Silhouettes (Sirtaki / Zeybek arms linked) -->
-          <circle cx="105" cy="540" r="24" fill="#fbbf24"/>
-          <path d="M75 680 L105 565 L135 680 Z" fill="#f43f5e"/>
-          <circle cx="210" cy="525" r="26" fill="#fbbf24"/>
-          <path d="M175 680 L210 555 L245 680 Z" fill="#38bdf8"/>
-          <circle cx="315" cy="540" r="24" fill="#fbbf24"/>
-          <path d="M285 680 L315 565 L345 680 Z" fill="#a855f7"/>
-          <!-- Linked Arms Dancing -->
-          <path d="M60 575 L105 585 L210 570 L315 585 L365 570" stroke="#fde047" stroke-width="8" stroke-linecap="round" fill="none"/>
-        </svg>`
+        imageUrl: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=900&q=85",
+        headerClass: "relative z-10 bg-gradient-to-r from-purple-800 via-fuchsia-700 to-amber-500 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500"
       },
       romantic_dinner: {
         name: "🕯️ Romantik Akşam Yemeği",
         short: "Romantik Yemek",
-        headerClass: "relative z-10 bg-gradient-to-r from-slate-900 via-rose-900 to-amber-700 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500",
-        svg: `<svg viewBox="0 0 420 850" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
-          <rect width="420" height="850" fill="#0f172a"/>
-          <!-- Full Moon & Stars over Sea -->
-          <circle cx="320" cy="170" r="48" fill="#fef9c3" opacity="0.9"/>
-          <path d="M0 520 Q210 500 420 520 L420 850 L0 850 Z" fill="#1e293b"/>
-          <!-- Candlelit Round Table -->
-          <ellipse cx="210" cy="710" rx="175" ry="85" fill="#fff1f2"/>
-          <!-- Glowing Candle -->
-          <rect x="200" y="615" width="20" height="65" rx="4" fill="#ffffff"/>
-          <circle cx="210" cy="595" r="28" fill="#fbbf24" opacity="0.45"/>
-          <path d="M210 575 Q222 595 210 612 Q198 595 210 575 Z" fill="#f59e0b"/>
-          <!-- Two Red Wine Glasses -->
-          <ellipse cx="135" cy="645" rx="18" ry="22" fill="#be123c"/>
-          <line x1="135" y1="667" x2="135" y2="705" stroke="#94a3b8" stroke-width="4"/>
-          <ellipse cx="285" cy="645" rx="18" ry="22" fill="#be123c"/>
-          <line x1="285" y1="667" x2="285" y2="705" stroke="#94a3b8" stroke-width="4"/>
-        </svg>`
+        imageUrl: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=85",
+        headerClass: "relative z-10 bg-gradient-to-r from-slate-900 via-rose-900 to-amber-700 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500"
       },
       seafood_salad: {
         name: "🥗 Deniz Ürünleri Salatası & Akdeniz Sofrası",
         short: "Deniz Salatası",
-        headerClass: "relative z-10 bg-gradient-to-r from-emerald-700 via-teal-600 to-cyan-600 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500",
-        svg: `<svg viewBox="0 0 420 850" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
-          <rect width="420" height="850" fill="#065f46"/>
-          <!-- Wooden Mediterranean Table & Ceramic Bowl -->
-          <circle cx="210" cy="560" r="165" fill="#ffffff"/>
-          <circle cx="210" cy="560" r="142" fill="#ecfdf5"/>
-          <!-- Greens, Shrimp, Octopus rings, Cherry Tomatoes & Lemon -->
-          <circle cx="165" cy="515" r="35" fill="#22c55e"/>
-          <circle cx="255" cy="525" r="38" fill="#16a34a"/>
-          <circle cx="195" cy="605" r="40" fill="#15803d"/>
-          <circle cx="155" cy="575" r="22" fill="#ef4444"/>
-          <circle cx="260" cy="590" r="22" fill="#ef4444"/>
-          <circle cx="215" cy="535" r="28" fill="#fb923c"/>
-          <circle cx="210" cy="475" r="24" fill="#fde047"/>
-        </svg>`
+        imageUrl: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=900&q=85",
+        headerClass: "relative z-10 bg-gradient-to-r from-emerald-700 via-teal-600 to-cyan-600 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500"
       },
       raki_table: {
         name: "🥃 Rakı & Ouzo Sofrası (İki Kıyı Keyfi)",
         short: "Rakı / Ouzo",
-        headerClass: "relative z-10 bg-gradient-to-r from-sky-800 via-blue-700 to-cyan-600 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500",
-        svg: `<svg viewBox="0 0 420 850" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
-          <rect width="420" height="850" fill="#0c4a6e"/>
-          <circle cx="330" cy="180" r="50" fill="#fde047" opacity="0.8"/>
-          <!-- Table at Seaside -->
-          <rect x="0" y="620" width="420" height="230" fill="#0284c7"/>
-          <!-- Two Tall Milky-White Rakı / Ouzo Glasses Clinking -->
-          <rect x="135" y="485" width="38" height="115" rx="6" fill="#f8fafc" opacity="0.92"/>
-          <rect x="235" y="485" width="38" height="115" rx="6" fill="#f8fafc" opacity="0.92"/>
-          <!-- Melon & White Feta Cheese Plate -->
-          <ellipse cx="210" cy="690" rx="115" ry="38" fill="#ffffff"/>
-          <path d="M135 685 Q210 730 285 685 Z" fill="#f59e0b"/>
-          <rect x="185" y="655" width="50" height="32" rx="4" fill="#fef9c3"/>
-        </svg>`
+        imageUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=85",
+        headerClass: "relative z-10 bg-gradient-to-r from-sky-800 via-blue-700 to-cyan-600 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500"
       },
       fish_feast: {
         name: "🐟 Balık Yemekleri & Sahil Sofrası",
         short: "Balık Sofrası",
-        headerClass: "relative z-10 bg-gradient-to-r from-cyan-800 via-sky-700 to-blue-600 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500",
-        svg: `<svg viewBox="0 0 420 850" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
-          <rect width="420" height="850" fill="#075985"/>
-          <!-- Platter with Grilled Sea Bream / Fish & Lemon Slices -->
-          <ellipse cx="210" cy="560" rx="175" ry="95" fill="#ffffff"/>
-          <ellipse cx="210" cy="560" rx="150" ry="75" fill="#f0f9ff"/>
-          <!-- Stylized Grilled Fish -->
-          <path d="M95 560 Q205 495 305 560 Q205 625 95 560 Z" fill="#d97706"/>
-          <polygon points="300,560 345,525 345,595" fill="#b45309"/>
-          <circle cx="130" cy="552" r="6" fill="#ffffff"/>
-          <!-- Lemon & Arugula Garnish -->
-          <circle cx="185" cy="520" r="18" fill="#fde047"/>
-          <circle cx="235" cy="600" r="18" fill="#fde047"/>
-          <circle cx="255" cy="520" r="20" fill="#22c55e"/>
-        </svg>`
+        imageUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=900&q=85",
+        headerClass: "relative z-10 bg-gradient-to-r from-cyan-800 via-sky-700 to-blue-600 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500"
       }
     };
 
@@ -1360,8 +1240,8 @@
       if (!theme) return;
 
       const bgLayer = document.getElementById("appBackgroundLayer");
-      bgLayer.innerHTML = theme.svg;
-      bgLayer.style.opacity = isShowcaseMode ? "0.95" : "0.42";
+      bgLayer.innerHTML = `<img src="${theme.imageUrl}" alt="${theme.name}" class="w-full h-full object-cover" />`;
+      bgLayer.style.opacity = isShowcaseMode ? "1" : "0.60";
 
       document.getElementById("appHeaderBar").className = theme.headerClass;
       document.getElementById("headerSubtitle").textContent = theme.name + " • 🇹🇷 & 🇬🇷";
@@ -1369,11 +1249,11 @@
 
       // Update active button border on right panel
       document.querySelectorAll('.bg-theme-btn').forEach(btn => {
-        btn.className = "bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2.5 text-left transition";
+        btn.className = "bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2 text-left transition overflow-hidden";
       });
       const activeBtn = document.getElementById("bgBtn-" + themeKey);
       if (activeBtn) {
-        activeBtn.className = "bg-theme-btn border-2 border-amber-500 bg-amber-500/15 rounded-xl p-2.5 text-left transition shadow-sm";
+        activeBtn.className = "bg-theme-btn border-2 border-amber-500 bg-amber-500/15 rounded-xl p-2 text-left transition shadow-sm overflow-hidden";
       }
 
       showToast("🎨 Arka Plan Değiştirildi: " + theme.name);
@@ -1386,11 +1266,11 @@
       const btn = document.getElementById("showcaseBgBtn");
 
       if (isShowcaseMode) {
-        bgLayer.style.opacity = "0.98";
-        screenContainer.style.opacity = "0.12";
+        bgLayer.style.opacity = "1";
+        screenContainer.style.opacity = "0.08";
         btn.textContent = "📱 Kartları Geri Getir";
       } else {
-        bgLayer.style.opacity = "0.42";
+        bgLayer.style.opacity = "0.60";
         screenContainer.style.opacity = "1";
         btn.textContent = "🖼️ Arka Planı Net Gör";
       }
@@ -1406,8 +1286,9 @@
             const t = appBackgroundThemes[k];
             const isSel = k === currentBgKey;
             return `
-              <button onclick="setAppBackground('${k}'); closeActionModal()" class="p-2.5 rounded-xl text-left border ${isSel ? 'border-2 border-amber-500 bg-amber-500/15 font-bold' : 'border-[var(--border)] bg-[var(--background)]'}">
-                <div class="text-xs font-bold">${t.name}</div>
+              <button onclick="setAppBackground('${k}'); closeActionModal()" class="p-2 rounded-xl text-left border overflow-hidden transition ${isSel ? 'border-2 border-amber-500 bg-amber-500/15 font-bold' : 'border-[var(--border)] bg-[var(--background)]'}">
+                <img src="${t.imageUrl}" alt="${t.name}" class="w-full h-16 object-cover rounded-lg mb-1.5" />
+                <div class="text-xs font-bold leading-tight">${t.name}</div>
               </button>
             `;
           }).join('')}
