@@ -1,0 +1,10 @@
+{
+  "name": "Aegean Hearts — Türk & Yunan Flört ve Seyahat",
+  "short_name": "Aegean Hearts",
+  "description": "İki Kıyı, Tek Kalp — Ege Kültür, Seyahat ve Flört Platformu",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0284c7",
+  "orientation": "portrait"
+}

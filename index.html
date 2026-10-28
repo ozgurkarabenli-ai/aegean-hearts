@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0284c7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="/manifest.json">
+  <title>Aegean Hearts — Türk & Yunan Flört ve Seyahat Platformu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    :root {
+      --background: #0f172a;
+      --card: #1e293b;
+      --foreground: #f8fafc;
+      --muted-foreground: #94a3b8;
+      --border: #334155;
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .card-transition {
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+  </style>
+</head>
+<body class="bg-[var(--background)] text-[var(--foreground)] antialiased p-4 md:p-6">
+
+  <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-6 items-start justify-center">
+
+    <!-- MOBILE PWA SIMULATOR FRAME -->
+    <div class="w-full max-w-[420px] mx-auto lg:mx-0 bg-[var(--card)] border-2 border-[var(--border)] rounded-[36px] shadow-2xl overflow-hidden flex flex-col relative" style="height: 850px;">
+
+      <!-- DYNAMIC AMBIENT BACKGROUND WALLPAPER LAYER -->
+      <div id="appBackgroundLayer" class="absolute inset-0 pointer-events-none z-0 opacity-35 transition-all duration-500"></div>
+
+      <!-- PWA Top Status & Header Bar -->
+      <div id="appHeaderBar" class="relative z-10 bg-gradient-to-r from-sky-700 via-blue-600 to-cyan-600 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500">
+        <div class="flex justify-between items-center text-xs opacity-95 mb-2">
+          <div class="flex items-center gap-1.5">
+            <span class="font-medium">14:30</span>
+            <span class="bg-emerald-500/30 border border-emerald-300/40 px-2 py-0.5 rounded-full text-xs flex items-center gap-1">
+              <span>🛡️</span>
+              <span id="trustScoreHeader">Güven: %100</span>
+            </span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <button onclick="openBgSelectorModal()" class="bg-white/20 hover:bg-white/30 border border-white/40 px-2 py-0.5 rounded-full text-xs font-bold flex items-center gap-1 shadow transition" title="Uygulama Arka Planını Değiştir">
+              <span>🎨</span>
+              <span id="activeBgShortLabel">Tema</span>
+            </button>
+            <button onclick="switchTab('vip')" class="bg-amber-400 text-slate-950 font-extrabold px-2 py-0.5 rounded-full text-xs flex items-center gap-1 shadow">
+              <span>👑</span>
+              <span>GOLD</span>
+            </button>
+            <button onclick="cycleLanguage()" id="langBtn" class="bg-white/15 hover:bg-white/25 border border-white/30 rounded-full px-2 py-0.5 text-xs font-semibold transition">
+              🇹🇷 TR
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2 cursor-pointer" onclick="switchTab('discover')">
+            <div class="w-9 h-9 rounded-full bg-white flex items-center justify-center shadow-inner text-lg">
+              🧿
+            </div>
+            <div>
+              <div class="font-bold text-base tracking-tight flex items-center gap-1.5">
+                <span>Aegean Hearts</span>
+              </div>
+              <div class="text-xs text-sky-100" id="headerSubtitle">🌅 Gün Batımı Plajı Modu • 🇹🇷 & 🇬🇷</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-1.5">
+            <button onclick="switchTab('vip')" class="bg-white/15 hover:bg-white/25 border border-white/30 rounded-full px-2.5 py-1 flex items-center gap-1 text-xs font-semibold transition">
+              <span>🦪</span>
+              <span id="pearlCount">180</span>
+              <span class="text-amber-300 font-bold">+</span>
+            </button>
+            <button onclick="previewMyCard()" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold px-2.5 py-1 rounded-full text-xs shadow transition flex items-center gap-1">
+              <span>👁️</span>
+              <span>Önizle</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DYNAMIC SCREEN CONTENT AREA -->
+      <div class="flex-1 overflow-y-auto hide-scrollbar relative z-10 bg-transparent" id="screenContainer">
+
+        <!-- ==================== TAB 1: KEŞFET ==================== -->
+        <div id="tab-discover" class="p-3.5 space-y-2.5">
+          
+          <!-- 3-Way Match Mode Switcher -->
+          <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-1 grid grid-cols-3 gap-1 shadow-sm">
+            <button id="modeAcross" onclick="setDiscoverMode('across')" class="py-1.5 px-2 rounded-xl text-xs font-bold bg-sky-600 text-white shadow-sm transition flex items-center justify-center gap-1">
+              <span>🧭</span>
+              <span>Karşı Kıyı</span>
+            </button>
+            <button id="modeSame" onclick="setDiscoverMode('same')" class="py-1.5 px-2 rounded-xl text-xs font-semibold text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition flex items-center justify-center gap-1">
+              <span>📍</span>
+              <span>Kendi Kıyım</span>
+            </button>
+            <button id="modeAll" onclick="setDiscoverMode('all')" class="py-1.5 px-2 rounded-xl text-xs font-semibold text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition flex items-center justify-center gap-1">
+              <span>🌊</span>
+              <span>Tüm Ege</span>
+            </button>
+          </div>
+
+          <!-- SUB-CORRIDOR SELECTOR FOR "KARŞI KIYI" (CAR, FERRY, FLIGHT) -->
+          <div id="acrossCorridorsBar" class="space-y-1.5">
+            <div class="flex gap-1.5 overflow-x-auto hide-scrollbar">
+              <button id="corrAll" onclick="setCorridorFilter('all')" class="bg-indigo-600 text-white px-2.5 py-1 rounded-xl text-xs font-bold shrink-0">
+                ⚡ Tüm Yakın Hatlar
+              </button>
+              <button id="corrCar" onclick="setCorridorFilter('car')" class="bg-[var(--card)] border border-[var(--border)] px-2.5 py-1 rounded-xl text-xs font-semibold shrink-0 flex items-center gap-1">
+                <span>🚗</span>
+                <span>Araba (Edirne ↔ Dedeağaç/Kavala)</span>
+              </button>
+              <button id="corrFerry" onclick="setCorridorFilter('ferry')" class="bg-[var(--card)] border border-[var(--border)] px-2.5 py-1 rounded-xl text-xs font-semibold shrink-0 flex items-center gap-1">
+                <span>⛴️</span>
+                <span>Feribot (Çeşme/Marmaris ↔ Adalar)</span>
+              </button>
+              <button id="corrFlight" onclick="setCorridorFilter('flight')" class="bg-[var(--card)] border border-[var(--border)] px-2.5 py-1 rounded-xl text-xs font-semibold shrink-0 flex items-center gap-1">
+                <span>✈️</span>
+                <span>Direkt Uçuş (İst/İzmir ↔ Atina/Selanik)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Active Mode & Age Filter Banner -->
+          <div class="bg-sky-500/10 border border-sky-500/30 rounded-xl px-3 py-2 flex items-center justify-between text-xs gap-2">
+            <div class="flex items-center gap-2">
+              <span id="modeIconBadge" class="text-base">🚗</span>
+              <div>
+                <div class="font-bold text-sky-600 dark:text-sky-400" id="routeFilterText">Karşı Kıyı: Araba, Feribot & Direkt Uçuş</div>
+                <div class="text-[var(--muted-foreground)]" id="routeFilterSub">Aktif Yaş Filtresi: <strong id="discoverAgeLabel">Tüm Yaşlar (25 - 60+)</strong></div>
+              </div>
+            </div>
+            <button onclick="switchTab('profile')" class="bg-sky-600 text-white font-bold px-2.5 py-1 rounded-lg shrink-0">
+              Yaş & Filtre
+            </button>
+          </div>
+
+          <!-- PROFILE CARD -->
+          <div id="profileCard" class="card-transition bg-[var(--card)] border border-[var(--border)] rounded-3xl overflow-hidden shadow-lg relative">
+            
+            <!-- Interactive Multi-Photo Gallery on Discover Card (Larger 350px & Unobstructed) -->
+            <div class="relative overflow-hidden bg-slate-900 text-white select-none group" style="height: 350px;">
+              <!-- Clickable Photo Area to Open Fullscreen Gallery -->
+              <div id="discoverPhotoCanvas" onclick="openFullscreenGallery('discover', currentDiscoverPhotoIdx)" class="w-full h-full cursor-zoom-in" title="Tam Ekran Galeri için Tıkla"></div>
+
+              <!-- Photo Story Progress Bars -->
+              <div class="absolute top-2.5 inset-x-3 flex gap-1.5 z-20">
+                <button onclick="setDiscoverPhoto(0)" id="discBar0" class="h-1.5 flex-1 rounded-full bg-white transition"></button>
+                <button onclick="setDiscoverPhoto(1)" id="discBar1" class="h-1.5 flex-1 rounded-full bg-white/40 transition"></button>
+                <button onclick="setDiscoverPhoto(2)" id="discBar2" class="h-1.5 flex-1 rounded-full bg-white/40 transition"></button>
+              </div>
+
+              <!-- Left / Right Photo Tap Zones -->
+              <button onclick="event.stopPropagation(); prevDiscoverPhoto()" class="absolute inset-y-12 left-0 w-12 z-20 flex items-center justify-center">
+                <span class="bg-black/50 hover:bg-black/80 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shadow">‹</span>
+              </button>
+              <button onclick="event.stopPropagation(); nextDiscoverPhoto()" class="absolute inset-y-12 right-0 w-12 z-20 flex items-center justify-center">
+                <span class="bg-black/50 hover:bg-black/80 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shadow">›</span>
+              </button>
+
+              <!-- Minimal Top Strip: Location + Fullscreen Gallery Button -->
+              <div class="absolute top-6 inset-x-3 z-20 flex justify-between items-center gap-2">
+                <span class="bg-black/55 backdrop-blur-md text-white px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1 pointer-events-none">
+                  <span id="profileFlag">🇬🇷</span>
+                  <span id="profileCity">Alexandroupoli (Dedeağaç)</span>
+                </span>
+                <button onclick="openFullscreenGallery('discover', currentDiscoverPhotoIdx)" class="bg-black/65 hover:bg-black/85 backdrop-blur-md text-amber-300 border border-amber-400/40 font-bold px-2.5 py-1 rounded-full text-xs shrink-0 shadow flex items-center gap-1">
+                  <span>🔍</span>
+                  <span>Tam Ekran Galeri</span>
+                </button>
+              </div>
+
+              <!-- Clean, Compact Bottom Overlay (Doesn't cover the photo!) -->
+              <div onclick="openFullscreenGallery('discover', currentDiscoverPhotoIdx)" class="absolute bottom-0 inset-x-0 z-10 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-3.5 pt-8 cursor-zoom-in flex items-end justify-between">
+                <div>
+                  <h2 class="text-xl font-bold flex items-center gap-2 drop-shadow">
+                    <span id="profileName">Maria Nikolaou, 28</span>
+                  </h2>
+                  <p id="profileRole" class="text-xs text-sky-200 mt-0.5">🏥 Eczacı • ♉ Boğa • 🇬🇷 🇬🇧 (Biraz 🇹🇷)</p>
+                </div>
+                <span id="profileDistance" class="bg-amber-400 text-slate-950 font-bold px-2.5 py-1 rounded-full text-xs shrink-0 shadow">
+                  🚗 40 dk (İpsala)
+                </span>
+              </div>
+            </div>
+
+            <!-- Card Body: Route, Roots, Bio, Lifestyle Details & Spotify (Moved below photo so photo stays clean!) -->
+            <div class="p-3.5 space-y-2.5">
+              <!-- Route & Family Roots Info (Cleanly below the photo) -->
+              <div class="space-y-1.5">
+                <div class="flex items-center justify-between gap-1.5">
+                  <span id="matchTypePill" class="bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 border border-indigo-500/30 px-2.5 py-1 rounded-lg text-xs font-bold">
+                    🚗 Edirne ↔ Dedeağaç Hattı
+                  </span>
+                  <span class="bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 px-2.5 py-1 rounded-lg text-xs font-semibold truncate" id="profileRoots">
+                    🌿 Dedeleri Edirne kökenli
+                  </span>
+                </div>
+                <div class="bg-amber-500/15 border border-amber-500/30 text-amber-800 dark:text-amber-300 rounded-xl px-3 py-1.5 text-xs font-semibold flex items-center gap-1.5">
+                  <span>✈️</span>
+                  <span id="profileTravelPlan">Rota: Bu Cumartesi arabayla Edirne & Tekirdağ'da!</span>
+                </div>
+              </div>
+              <div class="bg-[var(--background)] border border-[var(--border)] rounded-2xl p-2.5">
+                <div class="flex justify-between items-center mb-1">
+                  <span class="text-xs font-semibold text-[var(--muted-foreground)]">Hakkımda & Ne Arıyorum</span>
+                  <button onclick="toggleBioTranslation()" class="text-xs font-semibold text-sky-600 dark:text-sky-400 flex items-center gap-1 hover:underline">
+                    <span>🌐</span>
+                    <span id="bioTranslateBtnText">AI Çeviriyi Gör (TR/GR)</span>
+                  </button>
+                </div>
+                <p id="profileBio" class="text-xs leading-relaxed"></p>
+              </div>
+
+              <div class="grid grid-cols-2 gap-1.5 text-xs" id="profileDetailsGrid"></div>
+              <div id="profileBadges" class="flex flex-wrap gap-1.5"></div>
+
+              <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-2 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <div class="w-7 h-7 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-xs font-bold shrink-0">🎵</div>
+                  <div id="profileSong" class="text-xs font-bold">Thodoris Ferris — Mataia</div>
+                </div>
+                <button onclick="openActionModal('spotify')" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-2.5 py-1 rounded-xl transition shrink-0">
+                  Şarkı Gönder
+                </button>
+              </div>
+
+              <!-- 5 ACTION BUTTONS BAR -->
+              <div class="pt-0.5 grid grid-cols-5 gap-2 items-center">
+                <button onclick="nextProfile('pass')" class="h-11 rounded-2xl border border-[var(--border)] bg-[var(--background)] hover:bg-rose-500/10 flex flex-col items-center justify-center transition">
+                  <span class="text-base">✖️</span>
+                  <span class="text-xs text-[var(--muted-foreground)]">Geç</span>
+                </button>
+                <button onclick="openActionModal('mati')" class="h-11 rounded-2xl border border-sky-500/40 bg-sky-500/10 hover:bg-sky-500/20 flex flex-col items-center justify-center transition">
+                  <span class="text-base">🧿</span>
+                  <span class="text-xs font-semibold text-sky-600 dark:text-sky-400">Mati</span>
+                </button>
+                <button onclick="openActionModal('coffee')" class="h-12 rounded-2xl bg-gradient-to-b from-amber-400 to-amber-500 text-slate-950 font-bold shadow-md hover:brightness-105 flex flex-col items-center justify-center transition">
+                  <span class="text-lg">☕</span>
+                  <span class="text-xs font-bold">Kahve</span>
+                </button>
+                <button onclick="openActionModal('spotify')" class="h-11 rounded-2xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 flex flex-col items-center justify-center transition">
+                  <span class="text-base">🎵</span>
+                  <span class="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Şarkı</span>
+                </button>
+                <button onclick="openActionModal('match')" class="h-11 rounded-2xl bg-rose-500 hover:bg-rose-600 text-white shadow flex flex-col items-center justify-center transition">
+                  <span class="text-base">💙</span>
+                  <span class="text-xs font-semibold">Beğen</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ==================== TAB 2: SEYAHAT & ORTAK TATİL TAKVİMİ ==================== -->
+        <div id="tab-travel" class="p-3.5 space-y-4 hidden">
+          <div class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-2xl p-4 shadow">
+            <h3 class="font-bold text-base">🚗⛴️✈️ Sınır Ötesi Rotalar & Ortak Tatiller</h3>
+            <p class="text-xs text-sky-100 mt-0.5">Araba ile Edirne-Dedeağaç, Feribot ile Çeşme-Sakız / Marmaris-Rodos veya Uçak ile İstanbul-Atina!</p>
+          </div>
+
+          <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-3.5 space-y-2.5 shadow-sm">
+            <h4 class="font-bold text-sm">🛣️ Popüler Karşı Kıyı Koridorları</h4>
+            <div class="space-y-2 text-xs">
+              <div class="border border-[var(--border)] bg-[var(--background)] rounded-xl p-2.5 flex justify-between items-center">
+                <div>
+                  <div class="font-bold">🚗 Trakya Karayolu Hattı (İpsala / Pazarkule)</div>
+                  <div class="text-[var(--muted-foreground)]">Edirne / Tekirdağ / İst ↔ Alexandroupoli, Kavala, Selanik</div>
+                </div>
+                <span class="bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-bold px-2 py-1 rounded">35 dk - 2 sa</span>
+              </div>
+
+              <div class="border border-[var(--border)] bg-[var(--background)] rounded-xl p-2.5 flex justify-between items-center">
+                <div>
+                  <div class="font-bold">⛴️ Ege Feribot Hattı (Kıyı ↔ Adalar)</div>
+                  <div class="text-[var(--muted-foreground)]">Ayvalık↔Midilli, Çeşme↔Sakız, Bodrum↔Kos, Marmaris↔Rodos</div>
+                </div>
+                <span class="bg-sky-500/15 text-sky-600 dark:text-sky-400 font-bold px-2 py-1 rounded">30 - 60 dk</span>
+              </div>
+
+              <div class="border border-[var(--border)] bg-[var(--background)] rounded-xl p-2.5 flex justify-between items-center">
+                <div>
+                  <div class="font-bold">✈️ Direkt Hava Koridoru</div>
+                  <div class="text-[var(--muted-foreground)]">İstanbul / İzmir / Antalya ↔ Atina & Selanik</div>
+                </div>
+                <span class="bg-amber-500/15 text-amber-600 dark:text-amber-400 font-bold px-2 py-1 rounded">1 sa 15 dk</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== TAB 3: EGE MEYDANI / AGORA ==================== -->
+        <div id="tab-agora" class="p-3.5 space-y-4 hidden">
+          <div class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl p-4 shadow">
+            <h3 class="font-bold text-base">🏛️ Ege Meydanı (Agora)</h3>
+            <p class="text-xs text-indigo-100 mt-0.5">Ortak kelimeleri tahmin et, kültür anketlerine katıl!</p>
+          </div>
+        </div>
+
+        <!-- ==================== TAB 4: SOHBET & EGE KALKANI ==================== -->
+        <div id="tab-chat" class="p-3.5 flex flex-col h-full hidden" style="min-height: 640px;">
+          <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-3 flex items-center justify-between shadow-sm mb-2.5">
+            <div class="flex items-center gap-2.5">
+              <div class="w-10 h-10 rounded-full bg-sky-500/20 border border-sky-500 flex items-center justify-center text-xl">👩‍⚕️</div>
+              <div>
+                <div class="font-bold text-sm">Maria, 28 (Alexandroupoli 🇬🇷)</div>
+                <div class="text-xs text-[var(--muted-foreground)]">🚗 Edirne'ye arabayla 40 dk mesafede</div>
+              </div>
+            </div>
+            <button onclick="openShieldReportModal()" class="bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/30 px-2.5 py-1 rounded-xl text-xs font-bold">
+              🛡️ Kalkan
+            </button>
+          </div>
+
+          <div id="chatMessages" class="flex-1 space-y-3 overflow-y-auto pr-1">
+            <div class="flex items-start gap-2 max-w-[88%]">
+              <div class="w-7 h-7 rounded-full bg-sky-500/20 flex items-center justify-center text-xs shrink-0 mt-1">👩‍⚕️</div>
+              <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl rounded-tl-sm p-3 shadow-sm space-y-1.5">
+                <p class="text-xs text-[var(--muted-foreground)] italic">
+                  "Γεια! Έρχομαι στην Αδριανούπολη (Edirne) με το αυτοκίνητο αυτό το Σάββατο! Πάμε για καφέ;"
+                </p>
+                <div class="bg-sky-500/10 border-l-2 border-sky-500 pl-2 py-1 text-xs font-medium">
+                  <span class="text-sky-600 dark:text-sky-400 font-bold">🌐 AI Çeviri (TR):</span> "Selam! Bu Cumartesi arabayla Edirne'ye geliyorum! Kahve içmeye gidelim mi?"
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-2 pt-2 border-t border-[var(--border)]">
+            <div class="flex gap-2 items-center mt-1">
+              <input id="chatInput" type="text" placeholder="Mesaj yaz..." class="flex-1 bg-[var(--card)] border border-[var(--border)] rounded-xl px-3 py-2.5 text-xs" onkeydown="if(event.key==='Enter') sendUserChat()">
+              <button onclick="sendUserChat()" class="bg-sky-600 text-white font-bold px-3.5 py-2.5 rounded-xl text-xs">Gönder</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== TAB 5: PROFİLİM & YAŞ / KÖK / TERCİHLER (TAM KAPSAMLI) ==================== -->
+        <div id="tab-profile" class="p-3.5 space-y-4 hidden">
+          
+          <!-- Top Profile Card & 4-Photo Gallery -->
+          <div class="bg-[var(--card)] border border-[var(--border)] rounded-3xl p-4 shadow-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-16 rounded-2xl overflow-hidden shadow border-2 border-sky-500 relative shrink-0 cursor-pointer" onclick="previewMyCard()">
+                  <svg viewBox="0 0 100 100" class="w-full h-full">
+                    <rect width="100" height="100" fill="#0284c7"/>
+                    <circle cx="80" cy="22" r="12" fill="#fde047"/>
+                    <path d="M0 75 Q50 65 100 75 L100 100 L0 100 Z" fill="#0369a1"/>
+                    <circle cx="50" cy="42" r="16" fill="#fed7aa"/>
+                    <path d="M34 36 Q50 20 66 36" fill="#1e293b"/>
+                    <path d="M26 95 Q50 65 74 95" fill="#ffffff"/>
+                  </svg>
+                  <span class="absolute bottom-0.5 right-0.5 bg-emerald-500 text-white text-xs font-bold px-1 rounded-full">✓</span>
+                </div>
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <input id="myNameInput" type="text" value="Özgür, 42" class="font-bold text-base bg-transparent border-b border-dashed border-[var(--border)] focus:border-sky-500 focus:outline-none w-32">
+                    <span class="text-sm">🇹🇷</span>
+                  </div>
+                  <div class="text-xs text-[var(--muted-foreground)] mt-0.5">📍 İstanbul / İzmir • <span class="text-emerald-600 dark:text-emerald-400 font-semibold">🛡️ %100 Güven</span></div>
+                  <div class="mt-1 flex items-center gap-1.5">
+                    <span class="bg-amber-500/15 text-amber-600 dark:text-amber-400 text-xs font-semibold px-2 py-0.5 rounded-md">🌿 Babaannesi Rodos Doğumlu</span>
+                  </div>
+                </div>
+              </div>
+              <button onclick="previewMyCard()" class="bg-amber-400 hover:bg-amber-500 text-slate-950 text-xs font-extrabold px-3 py-2.5 rounded-xl shadow shrink-0 flex items-center gap-1">
+                <span>👁️</span>
+                <span>Kartımı Gör</span>
+              </button>
+            </div>
+
+            <!-- Photo & Short Video Gallery Slots (Standard: 10 Photo + 2 Video | VIP: 20 Photo + 5 Video) -->
+            <div class="space-y-2.5 pt-1 border-t border-[var(--border)]">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-xs font-bold block">📸 Fotoğraf & 🎬 Kısa Video Galerim</span>
+                  <span class="text-xs text-[var(--muted-foreground)]">Zorunlu: Min. 2 Foto • Standart: 10 Foto, 2 Video • 👑 VIP: 20 Foto, 5 Video</span>
+                </div>
+              </div>
+
+              <!-- Quota Status Pills -->
+              <div class="flex items-center justify-between bg-[var(--background)] border border-[var(--border)] rounded-xl px-3 py-1.5 text-xs">
+                <div class="flex items-center gap-3">
+                  <span id="photoQuotaText" class="font-bold text-sky-600 dark:text-sky-400">📸 Fotoğraf: 4 / 20 (VIP)</span>
+                  <span id="videoQuotaText" class="font-bold text-purple-600 dark:text-purple-400">🎬 Video: 1 / 5 (VIP)</span>
+                </div>
+                <button onclick="toggleVipGalleryQuota()" id="quotaTierBtn" class="bg-amber-400 text-slate-950 font-extrabold px-2 py-0.5 rounded text-xs">
+                  👑 VIP Kota Aktif
+                </button>
+              </div>
+
+              <!-- 5-Column Media Grid: 4 Photos + 1 Short Video + Add Buttons -->
+              <div class="grid grid-cols-5 gap-1.5">
+                <button onclick="openPhotoPreviewModal(0)" class="rounded-xl overflow-hidden relative border-2 border-sky-500 shadow" style="height: 64px;">
+                  <svg viewBox="0 0 120 120" class="w-full h-full"><rect width="120" height="120" fill="#0284c7"/><circle cx="90" cy="28" r="18" fill="#fbbf24"/><circle cx="60" cy="48" r="18" fill="#fdba74"/><path d="M32 120 Q60 78 88 120" fill="#f8fafc"/></svg>
+                  <span class="absolute bottom-0 inset-x-0 bg-black/65 text-white text-xs py-0.5 text-center font-semibold">1. Foto</span>
+                </button>
+                <button onclick="openPhotoPreviewModal(1)" class="rounded-xl overflow-hidden relative border border-[var(--border)] shadow" style="height: 64px;">
+                  <svg viewBox="0 0 120 120" class="w-full h-full"><rect width="120" height="120" fill="#0ea5e9"/><path d="M65 20 L65 80 L25 80 Z" fill="#ffffff"/><path d="M20 84 L105 84 L92 98 L32 98 Z" fill="#b45309"/></svg>
+                  <span class="absolute bottom-0 inset-x-0 bg-black/65 text-white text-xs py-0.5 text-center font-semibold">2. Foto</span>
+                </button>
+                <button onclick="openPhotoPreviewModal(2)" class="rounded-xl overflow-hidden relative border border-[var(--border)] shadow" style="height: 64px;">
+                  <svg viewBox="0 0 120 120" class="w-full h-full"><rect width="120" height="120" fill="#4f46e5"/><rect x="15" y="55" width="40" height="65" fill="#f8fafc"/><circle cx="85" cy="45" r="18" fill="#ec4899"/></svg>
+                  <span class="absolute bottom-0 inset-x-0 bg-black/65 text-white text-xs py-0.5 text-center font-semibold">3. Foto</span>
+                </button>
+                <button onclick="openPhotoPreviewModal(3)" class="rounded-xl overflow-hidden relative border border-[var(--border)] shadow" style="height: 64px;">
+                  <svg viewBox="0 0 120 120" class="w-full h-full"><rect width="120" height="120" fill="#1e1b4b"/><ellipse cx="60" cy="95" rx="45" ry="18" fill="#38bdf8"/></svg>
+                  <span class="absolute bottom-0 inset-x-0 bg-black/65 text-white text-xs py-0.5 text-center font-semibold">4. Foto</span>
+                </button>
+                <!-- Short Video Slot -->
+                <button onclick="showToast('🎬 12 saniyelik Rodos & Yelkenli tanıtım videosu oynatılıyor...')" class="rounded-xl overflow-hidden relative border-2 border-purple-500 shadow bg-purple-950 flex flex-col items-center justify-center text-white" style="height: 64px;">
+                  <span class="text-base">▶️</span>
+                  <span class="text-xs font-bold text-purple-200">1. Video</span>
+                </button>
+              </div>
+
+              <!-- Upload Action Buttons -->
+              <div class="grid grid-cols-2 gap-2">
+                <button onclick="showToast('📸 Yeni fotoğraf seçiliyor (VIP: 20 fotoğrafa kadar yükleyebilirsin)')" class="border border-dashed border-sky-500/60 hover:border-sky-500 bg-sky-500/5 text-sky-600 dark:text-sky-400 rounded-xl py-1.5 text-xs font-bold transition">
+                  + Fotoğraf Ekle (Max 20)
+                </button>
+                <button onclick="showToast('🎬 Yeni kısa video seçiliyor (VIP: 5 videoya kadar yükleyebilirsin)')" class="border border-dashed border-purple-500/60 hover:border-purple-500 bg-purple-500/5 text-purple-600 dark:text-purple-400 rounded-xl py-1.5 text-xs font-bold transition">
+                  + Kısa Video Ekle (Max 5)
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 1: KOMPAKT YAŞ ARALIĞI KAYDIRICISI (RANGE SLIDER: 18 – 60+) -->
+          <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-3.5 space-y-2 shadow-sm">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-xs flex items-center gap-1.5">
+                <span>🎂</span>
+                <span>Aradığım Yaş Aralığı</span>
+              </h4>
+              <span id="selectedAgeBadge" class="bg-sky-600 text-white text-xs font-bold px-2.5 py-0.5 rounded-full">30 – 55 Yaş</span>
+            </div>
+
+            <!-- Compact Dual Range Inputs -->
+            <div class="space-y-1.5 pt-1">
+              <div class="flex items-center gap-3">
+                <span class="text-xs font-semibold text-[var(--muted-foreground)] w-8">Min:</span>
+                <input id="minAgeRange" type="range" min="18" max="65" value="30" oninput="syncAgeSliders('min')" class="w-full accent-sky-600 cursor-pointer h-1.5 rounded-lg">
+                <span id="minAgeValText" class="text-xs font-bold w-10 text-right">30</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-xs font-semibold text-[var(--muted-foreground)] w-8">Max:</span>
+                <input id="maxAgeRange" type="range" min="20" max="65" value="55" oninput="syncAgeSliders('max')" class="w-full accent-sky-600 cursor-pointer h-1.5 rounded-lg">
+                <span id="maxAgeValText" class="text-xs font-bold w-10 text-right">55</span>
+              </div>
+              <div class="flex justify-between text-xs text-[var(--muted-foreground)] pt-0.5">
+                <span>18</span>
+                <span>30</span>
+                <span>45</span>
+                <span>60+</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2: AİLE KÖKLERİ -->
+          <div class="bg-gradient-to-br from-emerald-500/10 via-teal-500/10 to-sky-500/10 border border-emerald-500/30 rounded-2xl p-4 space-y-2.5 shadow-sm">
+            <h4 class="font-bold text-sm flex items-center gap-1.5 text-emerald-700 dark:text-emerald-300">
+              <span>🌿</span>
+              <span>Aile Kökleri & Karşı Kıyı Hikayem</span>
+            </h4>
+            <select id="myRootsBadgeSelect" class="w-full bg-[var(--card)] border border-[var(--border)] rounded-xl p-2.5 text-xs font-bold focus:outline-none">
+              <option value="🌿 Babaannem Rodos (Rhodes) Doğumlu" selected>🌿 Babaannem / Dedem Rodos (Oniki Adalar) Doğumlu</option>
+              <option value="🌿 Ailem Selanik / Kavala / Batı Trakya Kökenli">🌿 Ailem Selanik / Kavala / Batı Trakya Kökenli</option>
+              <option value="🌿 Ailem Girit (Crete) / Midilli / Sakız Göçmeni">🌿 Ailem Girit (Crete) / Midilli / Sakız Göçmeni</option>
+              <option value="🌊 Ailede Göç Yok Ama Ege Kültürünü Çok Seviyorum">🌊 Ailede Karşı Kıyı Kökü Yok, Hikayeyi Ben Başlatıyorum 😊</option>
+            </select>
+            <input id="myRootsStoryInput" type="text" value="Babaannem Rodos doğumlu! Çocukluğum onun anlattığı ada hikayeleri ve yemekleriyle geçti." class="w-full bg-[var(--card)] border border-[var(--border)] rounded-xl p-2.5 text-xs">
+          </div>
+
+          <!-- SECTION 3: MESLEK, BURÇ, ALKOL/SİGARA, FAVORİ YEMEKLER -->
+          <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-4 space-y-3 shadow-sm">
+            <h4 class="font-bold text-sm">✨ Kişisel Detaylar & Ege Zevklerim</h4>
+            <div class="grid grid-cols-2 gap-2">
+              <div class="bg-[var(--background)] border border-[var(--border)] rounded-xl p-2">
+                <label class="text-xs text-[var(--muted-foreground)] block">💼 Meslek</label>
+                <input id="myJobInput" type="text" value="Teknoloji & Girişimci" class="w-full bg-transparent font-bold text-xs mt-0.5">
+              </div>
+              <div class="bg-[var(--background)] border border-[var(--border)] rounded-xl p-2">
+                <label class="text-xs text-[var(--muted-foreground)] block">🔮 Burç</label>
+                <select id="myZodiacSelect" class="w-full bg-transparent font-bold text-xs mt-0.5">
+                  <option value="♏ Akrep">♏ Akrep</option>
+                  <option value="♌ Aslan">♌ Aslan</option>
+                  <option value="♎ Terazi">♎ Terazi</option>
+                  <option value="♉ Boğa">♉ Boğa</option>
+                </select>
+              </div>
+              <div class="bg-[var(--background)] border border-[var(--border)] rounded-xl p-2">
+                <label class="text-xs text-[var(--muted-foreground)] block">🍷 Alkol</label>
+                <select id="myDrinkSelect" class="w-full bg-transparent font-bold text-xs mt-0.5">
+                  <option value="🥃 Rakı, Ouzo & Şarap">🥃 Rakı, Ouzo & Şarap</option>
+                  <option value="🍹 Sosyal İçici">🍹 Sosyal İçici</option>
+                  <option value="💧 Kullanmıyorum">💧 Kullanmıyorum</option>
+                </select>
+              </div>
+              <div class="bg-[var(--background)] border border-[var(--border)] rounded-xl p-2">
+                <label class="text-xs text-[var(--muted-foreground)] block">🚬 Sigara</label>
+                <select id="mySmokeSelect" class="w-full bg-transparent font-bold text-xs mt-0.5">
+                  <option value="🌿 Kullanmıyorum">🌿 Kullanmıyorum</option>
+                  <option value="🥂 Sadece Tavernada">🥂 Sosyal / Tavernada</option>
+                </select>
+              </div>
+              <div class="bg-[var(--background)] border border-[var(--border)] rounded-xl p-2">
+                <label class="text-xs text-[var(--muted-foreground)] block">🇹🇷 Favori Türk Yemeği</label>
+                <select id="myFoodTR" class="w-full bg-transparent font-bold text-xs mt-0.5">
+                  <option value="Hünkârbeğendi">🍆 Hünkârbeğendi</option>
+                  <option value="Levrek Marin">🐟 Levrek Marin</option>
+                </select>
+              </div>
+              <div class="bg-[var(--background)] border border-[var(--border)] rounded-xl p-2">
+                <label class="text-xs text-[var(--muted-foreground)] block">🇬🇷 Favori Yunan Yemeği</label>
+                <select id="myFoodGR" class="w-full bg-transparent font-bold text-xs mt-0.5">
+                  <option value="Izgara Ahtapot & Saganaki">🐙 Ahtapot & Saganaki</option>
+                  <option value="Moussaka">🥗 Moussaka</option>
+                </select>
+              </div>
+            </div>
+
+            <button onclick="saveMyProfile()" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-xl text-xs shadow transition">
+              💾 Yaş Filtremi ve Profilimi Kaydet
+            </button>
+          </div>
+
+        </div>
+
+        <!-- ==================== TAB 6: VIP ==================== -->
+        <div id="tab-vip" class="p-3.5 space-y-4 hidden">
+          <div class="bg-gradient-to-br from-amber-500 via-amber-600 to-yellow-600 text-slate-950 rounded-3xl p-4 shadow-lg space-y-3">
+            <h3 class="text-lg font-extrabold">Aegean Hearts GOLD 👑</h3>
+            <p class="text-xs font-medium">18 yaştan 60+ yaşa kadar tüm Ege gezginleriyle sınırsız eşleş!</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FULLSCREEN GALLERY LIGHTBOX MODAL (COVERS ALMOST ENTIRE SCREEN!) -->
+      <div id="fullscreenGalleryModal" class="hidden absolute inset-0 bg-slate-950/95 backdrop-blur-md z-50 flex flex-col justify-between p-3.5 text-white select-none">
+        <!-- Gallery Top Header -->
+        <div class="flex items-center justify-between">
+          <div>
+            <div id="fsGalleryName" class="font-bold text-sm">Maria Nikolaou, 28 🇬🇷</div>
+            <div id="fsGalleryCounter" class="text-xs text-amber-300 font-semibold">Fotoğraf 1 / 3 • Tam Ekran Galeri Modu</div>
+          </div>
+          <button onclick="closeFullscreenGallery()" class="bg-white/15 hover:bg-white/25 text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1">
+            <span>✕</span>
+            <span>Kapat</span>
+          </button>
+        </div>
+
+        <!-- Giant Unobstructed Photo Area (Takes up most of the screen!) -->
+        <div class="flex-1 my-3 relative rounded-3xl overflow-hidden border border-white/20 bg-slate-900 shadow-2xl flex items-center justify-center">
+          <div id="fsGalleryCanvas" class="w-full h-full"></div>
+
+          <!-- Left / Right Navigation Arrows -->
+          <button onclick="stepFullscreenGallery(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/65 hover:bg-black/90 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold shadow-lg border border-white/20">
+            ‹
+          </button>
+          <button onclick="stepFullscreenGallery(1)" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/65 hover:bg-black/90 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold shadow-lg border border-white/20">
+            ›
+          </button>
+
+          <!-- Subtle Caption Pill at Bottom of Giant Photo -->
+          <div class="absolute bottom-3 inset-x-4 bg-black/65 backdrop-blur-md rounded-2xl px-3.5 py-2 text-center">
+            <div id="fsGalleryCaption" class="text-xs font-semibold text-white">1. Fotoğraf • Portre</div>
+          </div>
+        </div>
+
+        <!-- Thumbnail Strip at Bottom -->
+        <div id="fsGalleryThumbs" class="flex items-center justify-center gap-2 pb-1"></div>
+      </div>
+
+      <!-- INTERACTIVE MODAL OVERLAY -->
+      <div id="actionModal" class="hidden absolute inset-0 bg-black/75 backdrop-blur-sm z-30 flex items-center justify-center p-3.5">
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-3xl p-4 w-full max-w-sm shadow-2xl space-y-3 max-h-[92%] overflow-y-auto hide-scrollbar">
+          <div class="flex justify-between items-center">
+            <h3 id="modalTitle" class="font-bold text-sm">Detay</h3>
+            <button onclick="closeActionModal()" class="w-7 h-7 rounded-full bg-[var(--background)] border border-[var(--border)] text-xs font-bold flex items-center justify-center">✕</button>
+          </div>
+          <div id="modalBody" class="space-y-3 text-xs"></div>
+        </div>
+      </div>
+
+      <!-- TOAST NOTIFICATION -->
+      <div id="toastBox" class="hidden absolute top-20 inset-x-4 bg-slate-900 text-white border border-sky-400/40 rounded-2xl px-4 py-3 text-xs font-semibold shadow-xl z-40 flex items-center justify-between">
+        <span id="toastText">Bildirim</span>
+      </div>
+
+      <!-- PWA BOTTOM NAVIGATION BAR -->
+      <div class="bg-[var(--card)] border-t border-[var(--border)] px-2 py-2 grid grid-cols-5 gap-1 shrink-0">
+        <button onclick="switchTab('discover')" id="nav-discover" class="flex flex-col items-center justify-center py-1 rounded-xl text-[var(--muted-foreground)] hover:text-[var(--foreground)] font-medium transition">
+          <span class="text-lg">🔥</span>
+          <span class="text-xs">Keşfet</span>
+        </button>
+        <button onclick="switchTab('travel')" id="nav-travel" class="flex flex-col items-center justify-center py-1 rounded-xl text-[var(--muted-foreground)] hover:text-[var(--foreground)] font-medium transition">
+          <span class="text-lg">✈️</span>
+          <span class="text-xs">Seyahat</span>
+        </button>
+        <button onclick="switchTab('agora')" id="nav-agora" class="flex flex-col items-center justify-center py-1 rounded-xl text-[var(--muted-foreground)] hover:text-[var(--foreground)] font-medium transition">
+          <span class="text-lg">🏛️</span>
+          <span class="text-xs">Meydan</span>
+        </button>
+        <button onclick="switchTab('chat')" id="nav-chat" class="flex flex-col items-center justify-center py-1 rounded-xl text-[var(--muted-foreground)] hover:text-[var(--foreground)] font-medium transition relative">
+          <span class="text-lg">💬</span>
+          <span class="text-xs">Sohbet</span>
+          <span class="absolute top-0.5 right-3 w-2 h-2 bg-rose-500 rounded-full"></span>
+        </button>
+        <button onclick="switchTab('profile')" id="nav-profile" class="flex flex-col items-center justify-center py-1 rounded-xl text-sky-600 dark:text-sky-400 font-bold transition relative">
+          <span class="text-lg">👤</span>
+          <span class="text-xs">Profilim</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- RIGHT PANEL: BACKGROUND ATMOSPHERE SELECTOR & AGE / CORRIDOR TESTS -->
+    <div class="flex-1 space-y-4 w-full">
+
+      <!-- NEW: 8 APP BACKGROUND THEMES SELECTOR -->
+      <div class="bg-[var(--card)] border-2 border-amber-500/40 rounded-2xl p-5 shadow-sm space-y-3">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-bold flex items-center gap-2">
+            <span>🎨</span>
+            <span>Uygulama Arka Plan Atmosferi (Tıkla & Değiştir)</span>
+          </h2>
+          <button onclick="toggleWallpaperShowcase()" id="showcaseBgBtn" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-extrabold px-3 py-1 rounded-full text-xs shadow transition">
+            🖼️ Arka Planı Net Gör
+          </button>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)]">
+          Kullanıcılar o anki ruh hallerine göre uygulamanın arka planını ve üst bar atmosferini değiştirebilirler. Telefonda üst bardaki <strong>"🎨 Tema"</strong> butonundan veya aşağıdaki 8 konseptten birine tıklayarak canlı deneyebilirsin:
+        </p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
+          <button onclick="setAppBackground('sunset_beach')" id="bgBtn-sunset_beach" class="bg-theme-btn border-2 border-amber-500 bg-amber-500/10 rounded-xl p-2.5 text-left transition">
+            <div class="text-lg">🌅</div>
+            <div class="font-bold text-xs mt-1">Günbatımı Plaj</div>
+            <div class="text-xs text-[var(--muted-foreground)]">Romantik sahil</div>
+          </button>
+
+          <button onclick="setAppBackground('sunny_beach')" id="bgBtn-sunny_beach" class="bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2.5 text-left transition">
+            <div class="text-lg">🏖️</div>
+            <div class="font-bold text-xs mt-1">Güneşli Plaj</div>
+            <div class="text-xs text-[var(--muted-foreground)]">Turkuaz deniz</div>
+          </button>
+
+          <button onclick="setAppBackground('taverna')" id="bgBtn-taverna" class="bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2.5 text-left transition">
+            <div class="text-lg">🏛️</div>
+            <div class="font-bold text-xs mt-1">Taverna Sofrası</div>
+            <div class="text-xs text-[var(--muted-foreground)]">Mavi-beyaz masa</div>
+          </button>
+
+          <button onclick="setAppBackground('panigiri')" id="bgBtn-panigiri" class="bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2.5 text-left transition">
+            <div class="text-lg">💃</div>
+            <div class="font-bold text-xs mt-1">Panayır & Dans</div>
+            <div class="text-xs text-[var(--muted-foreground)]">Dans eden insanlar</div>
+          </button>
+
+          <button onclick="setAppBackground('romantic_dinner')" id="bgBtn-romantic_dinner" class="bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2.5 text-left transition">
+            <div class="text-lg">🕯️</div>
+            <div class="font-bold text-xs mt-1">Romantik Yemek</div>
+            <div class="text-xs text-[var(--muted-foreground)]">Mum ışığı & şarap</div>
+          </button>
+
+          <button onclick="setAppBackground('seafood_salad')" id="bgBtn-seafood_salad" class="bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2.5 text-left transition">
+            <div class="text-lg">🥗</div>
+            <div class="font-bold text-xs mt-1">Deniz Ürünleri Salata</div>
+            <div class="text-xs text-[var(--muted-foreground)]">Kalamar, karides, limon</div>
+          </button>
+
+          <button onclick="setAppBackground('raki_table')" id="bgBtn-raki_table" class="bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2.5 text-left transition">
+            <div class="text-lg">🥃</div>
+            <div class="font-bold text-xs mt-1">Rakı & Ouzo Sofrası</div>
+            <div class="text-xs text-[var(--muted-foreground)]">Buzlu kadeh & kavun</div>
+          </button>
+
+          <button onclick="setAppBackground('fish_feast')" id="bgBtn-fish_feast" class="bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2.5 text-left transition">
+            <div class="text-lg">🐟</div>
+            <div class="font-bold text-xs mt-1">Balık Yemekleri</div>
+            <div class="text-xs text-[var(--muted-foreground)]">Izgara çipura & meze</div>
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-5 shadow-sm space-y-3">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-bold flex items-center gap-2">
+            <span>🎂</span>
+            <span>Genişletilmiş Yaş Aralıkları (18 – 60+ Yaş)</span>
+          </h2>
+          <span class="bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-2.5 py-1 rounded-full text-xs font-semibold">Güncellendi</span>
+        </div>
+        <p class="text-sm text-[var(--muted-foreground)]">
+          Özellikle Ege adaları, yelken, gastronomi ve sınır ötesi seyahatlerde <strong>40'lı, 50'li ve 60+ yaş</strong> grubu en yüksek alım gücüne, yeşil pasaport/vize imkanına ve zaman özgürlüğüne sahip kitledir.
+        </p>
+
+        <div class="space-y-2 pt-1">
+          <div class="text-xs font-bold uppercase tracking-wider text-[var(--muted-foreground)]">Farklı Yaş Gruplarındaki Örnek Profilleri Gör (Tıkla):</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <button onclick="jumpToProfileByIndex(0)" class="border border-[var(--border)] hover:border-sky-500 bg-[var(--background)] rounded-xl p-3 text-left transition">
+              <div class="font-bold text-xs">🇬🇷 Maria, 28 (25-35 Yaş Grubu)</div>
+              <div class="text-xs text-[var(--muted-foreground)]">🚗 Alexandroupoli ↔ Edirne (Arabayla 40 dk)</div>
+            </button>
+
+            <button onclick="jumpToProfileByIndex(1)" class="border border-[var(--border)] hover:border-sky-500 bg-[var(--background)] rounded-xl p-3 text-left transition">
+              <div class="font-bold text-xs">🇬🇷 Sofia, 44 (35-45 & 45-55 Yaş Grubu)</div>
+              <div class="text-xs text-[var(--muted-foreground)]">⛴️ Rodos & Sakız • Butik Otel Sahibi • Babası İzmir kökenli</div>
+            </button>
+
+            <button onclick="jumpToProfileByIndex(2)" class="border border-[var(--border)] hover:border-amber-500 bg-[var(--background)] rounded-xl p-3 text-left transition">
+              <div class="font-bold text-xs">🇬🇷 Katerina, 58 (50-60 & 60+ Yaş Grubu)</div>
+              <div class="text-xs text-[var(--muted-foreground)]">✈️ Atina & Midilli • Akademisyen & Yelken Tutkunu</div>
+            </button>
+
+            <button onclick="jumpToProfileByIndex(3)" class="border border-[var(--border)] hover:border-emerald-500 bg-[var(--background)] rounded-xl p-3 text-left transition">
+              <div class="font-bold text-xs">🇹🇷 Defne, 39 (Kendi Kıyım — Tüm Ülke)</div>
+              <div class="text-xs text-[var(--muted-foreground)]">📍 Ankara & Bodrum • Girit & Rodos Göçmeni</div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const myProfilePhotos = [
+      {
+        caption: "1/4 • Çeşme Marina Gün Batımı",
+        svg: `<svg viewBox="0 0 400 280" class="w-full h-full"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0284c7"/><stop offset="55%" stop-color="#1d4ed8"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient></defs><rect width="400" height="280" fill="url(#g1)"/><circle cx="315" cy="70" r="42" fill="#fde047" opacity="0.9"/><path d="M0 205 Q130 180 260 205 T400 195 L400 280 L0 280 Z" fill="#0369a1"/><circle cx="200" cy="115" r="38" fill="#fdba74"/><path d="M162 102 Q200 62 238 102" fill="#1e293b"/><rect x="172" y="106" width="24" height="12" rx="4" fill="#0f172a"/><rect x="204" y="106" width="24" height="12" rx="4" fill="#0f172a"/><path d="M130 280 Q200 165 270 280" fill="#ffffff"/></svg>`
+      },
+      {
+        caption: "2/4 • Ege'de Yelken Keyfi",
+        svg: `<svg viewBox="0 0 400 280" class="w-full h-full"><rect width="400" height="280" fill="#0ea5e9"/><circle cx="80" cy="55" r="30" fill="#fef08a"/><path d="M210 45 L210 190 L115 190 Z" fill="#ffffff"/><path d="M220 65 L220 190 L295 190 Z" fill="#f1f5f9"/><path d="M100 198 L310 198 L280 230 L130 230 Z" fill="#b45309"/><path d="M0 220 Q120 195 240 220 T400 215 L400 280 L0 280 Z" fill="#0369a1"/></svg>`
+      },
+      {
+        caption: "3/4 • Babaannemin Memleketi Rodos Sokakları",
+        svg: `<svg viewBox="0 0 400 280" class="w-full h-full"><rect width="400" height="280" fill="#4338ca"/><rect x="40" y="90" width="130" height="190" fill="#f8fafc"/><rect x="75" y="135" width="45" height="65" rx="22" fill="#0284c7"/><rect x="200" y="75" width="155" height="205" fill="#fef3c7"/><circle cx="195" cy="85" r="35" fill="#ec4899"/><circle cx="240" cy="70" r="30" fill="#db2777"/></svg>`
+      },
+      {
+        caption: "4/4 • Alaçatı & Sakız Taverna Akşamı",
+        svg: `<svg viewBox="0 0 400 280" class="w-full h-full"><rect width="400" height="280" fill="#1e1b4b"/><circle cx="70" cy="48" r="8" fill="#fde047"/><circle cx="150" cy="58" r="8" fill="#fde047"/><circle cx="235" cy="58" r="8" fill="#fde047"/><circle cx="320" cy="46" r="8" fill="#fde047"/><ellipse cx="200" cy="230" rx="140" ry="42" fill="#38bdf8"/></svg>`
+      }
+    ];
+
+    const allProfiles = [
+      {
+        country: "GR",
+        age: 28,
+        corridor: "car",
+        matchTag: "🚗 Edirne ↔ Dedeağaç Karayolu Hattı",
+        name: "Maria Nikolaou, 28",
+        flag: "🇬🇷",
+        city: "Alexandroupoli (Dedeağaç)",
+        distance: "🚗 40 dk (İpsala)",
+        role: "🏥 Eczacı • ♉ Boğa • 🇬🇷 🇬🇧 (Biraz 🇹🇷)",
+        roots: "Aile Kökü: Dedeleri Edirne (Karaağaç) kökenli",
+        travel: "Rota: Bu Cumartesi arabayla Edirne & Tekirdağ'da!",
+        bioOriginal: "\"Μένω στην Αλεξανδρούπολη, μόλις 40 λεπτά με το αυτοκίνητο από την Αδριανούπολη! Έλα για θαλασσινά δίπλα στη θάλασσα!\"",
+        bioTranslated: "\"Dedeağaç'ta yaşıyorum, Edirne'ye arabayla sadece 40 dakika! Hafta sonu deniz ürünleri ve güzel sohbet için buluşalım!\"",
+        favFood: "Edirne Ciğeri & Izgara Kalamar",
+        drinkSmoke: "Beyaz Şarap & Tsipouro / Sigara Yok",
+        badges: ["🚗 Arabayla 40 Dk", "🛂 Sınır Komşusu", "💘 Flört & Hafta Sonu"],
+        song: "Thodoris Ferris — Mataia",
+        photoCaptions: [
+          "1/3 • Maria — Alexandroupoli Sahil Yürüyüşü",
+          "2/3 • Tarihi Alexandroupoli Deniz Feneri & Gün Batımı",
+          "3/3 • Dedeağaç Sahil Tavernası — Beyaz Şarap & Deniz Ürünleri"
+        ],
+        photos: [
+          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><defs><linearGradient id="mg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4f46e5"/><stop offset="50%" stop-color="#0284c7"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient></defs><rect width="400" height="350" fill="url(#mg1)"/><circle cx="320" cy="65" r="42" fill="#fde047" opacity="0.9"/><path d="M0 250 Q120 225 260 250 T400 240 L400 350 L0 350 Z" fill="#0369a1"/><rect x="65" y="130" width="24" height="120" fill="#ffffff"/><polygon points="60,130 94,130 77,98" fill="#ef4444"/><circle cx="215" cy="135" r="46" fill="#fed7aa"/><path d="M167 135 Q215 62 263 135" fill="#451a03"/><circle cx="198" cy="130" r="4.5" fill="#1e293b"/><circle cx="232" cy="130" r="4.5" fill="#1e293b"/><path d="M200 152 Q215 162 230 152" stroke="#e11d48" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M135 350 Q215 195 295 350" fill="#f43f5e"/></svg>`,
+          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><defs><linearGradient id="mg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f97316"/><stop offset="55%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#0c4a6e"/></linearGradient></defs><rect width="400" height="350" fill="url(#mg2)"/><circle cx="200" cy="155" r="55" fill="#fde047" opacity="0.85"/><path d="M0 245 Q200 225 400 245 L400 350 L0 350 Z" fill="#075985"/><rect x="182" y="95" width="36" height="150" fill="#f8fafc"/><rect x="176" y="88" width="48" height="12" fill="#dc2626"/><polygon points="180,88 220,88 200,62" fill="#dc2626"/><circle cx="200" cy="78" r="8" fill="#fef08a"/></svg>`,
+          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><rect width="400" height="350" fill="#0f172a"/><path d="M0 45 Q200 95 400 40" stroke="#fbbf24" stroke-width="2.5" fill="none"/><circle cx="70" cy="54" r="9" fill="#fde047"/><circle cx="155" cy="66" r="9" fill="#fde047"/><circle cx="245" cy="66" r="9" fill="#fde047"/><circle cx="330" cy="52" r="9" fill="#fde047"/><path d="M0 215 Q200 200 400 215 L400 350 L0 350 Z" fill="#0369a1"/><ellipse cx="200" cy="275" rx="150" ry="52" fill="#38bdf8"/><circle cx="170" cy="270" r="28" fill="#ffffff"/><circle cx="170" cy="270" r="20" fill="#f97316"/><rect x="235" y="210" width="22" height="52" rx="6" fill="#fef08a" opacity="0.9"/><rect x="268" y="218" width="18" height="44" rx="5" fill="#ffffff" opacity="0.9"/></svg>`
+        ]
+      },
+      {
+        country: "GR",
+        age: 44,
+        corridor: "ferry",
+        matchTag: "⛴️ Marmaris/Çeşme ↔ Rodos & Sakız Feribot Hattı",
+        name: "Sofia Papadaki, 44",
+        flag: "🇬🇷",
+        city: "Rodos (Rhodes) & Sakız",
+        distance: "⛴️ 45 dk Feribot",
+        role: "🏨 Butik Otel & Zeytinyağı Üreticisi • ♏ Akrep • 🇬🇷 🇬🇧",
+        roots: "Aile Kökü: Anne tarafı İzmir (Urla) & Bodrum kökenli",
+        travel: "Seyahat Planı: Kasım'da Marmaris, Bodrum ve İzmir'de!",
+        bioOriginal: "\"Έχω ένα μικρό boutique ξενοδοχείο στη Ρόδο. Αγαπώ το καλό κρασί, την ιστιοπλοΐα και τις ώριμες, ουσιαστικές συζητήσεις δίπλα στη θάλασσα.\"",
+        bioTranslated: "\"Rodos'ta küçük bir butik otelim var. İyi şarabı, yelken yapmayı ve deniz kenarında olgun, keyifli sohbetleri çok seviyorum. Senin babaannenin de Rodoslu olması harika!\"",
+        favFood: "Enginarlı Ege Mezeleri & Ahtapot",
+        drinkSmoke: "Kırmızı Şarap & Ouzo / Sigara Yok",
+        badges: ["⛴️ Rodos & Sakız", "⛵ Yelken & Gastronomi", "🌿 Urla/İzmir Kökü"],
+        song: "Haris Alexiou — To Tango Tis Nefelis",
+        photoCaptions: [
+          "1/3 • Sofia — Rodos Limanı Gün Batımı",
+          "2/3 • Rodos Eski Şehir (Old Town) & Begonviller",
+          "3/3 • Sakız & Rodos Yelken Turu"
+        ],
+        photos: [
+          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><defs><linearGradient id="sg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0284c7"/><stop offset="50%" stop-color="#6d28d9"/><stop offset="100%" stop-color="#d97706"/></linearGradient></defs><rect width="400" height="350" fill="url(#sg1)"/><circle cx="310" cy="65" r="42" fill="#fde047"/><circle cx="200" cy="135" r="46" fill="#fed7aa"/><path d="M152 135 Q200 58 248 135" fill="#78350f"/><circle cx="184" cy="130" r="4.5" fill="#1e293b"/><circle cx="216" cy="130" r="4.5" fill="#1e293b"/><path d="M186 150 Q200 160 214 150" stroke="#e11d48" stroke-width="3.5" fill="none"/><path d="M125 350 Q200 195 275 350" fill="#fbbf24"/></svg>`,
+          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><rect width="400" height="350" fill="#4338ca"/><rect x="35" y="100" width="140" height="250" fill="#fef3c7"/><rect x="75" y="160" width="55" height="90" rx="27" fill="#0284c7"/><rect x="200" y="80" width="165" height="270" fill="#fde68a"/><circle cx="195" cy="95" r="45" fill="#ec4899"/><circle cx="250" cy="80" r="38" fill="#db2777"/><circle cx="145" cy="110" r="32" fill="#f472b6"/></svg>`,
+          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><rect width="400" height="350" fill="#0ea5e9"/><circle cx="85" cy="65" r="36" fill="#fef08a"/><path d="M210 55 L210 230 L105 230 Z" fill="#ffffff"/><path d="M222 80 L222 230 L310 230 Z" fill="#f1f5f9"/><path d="M90 238 L325 238 L290 275 L125 275 Z" fill="#b45309"/><path d="M0 265 Q120 240 240 265 T400 255 L400 350 L0 350 Z" fill="#0369a1"/></svg>`
+        ]
+      },
+      {
+        country: "GR",
+        age: 58,
+        corridor: "flight",
+        matchTag: "✈️ Direkt Uçuş & Feribot (Atina & Midilli)",
+        name: "Katerina Vlahou, 58",
+        flag: "🇬🇷",
+        city: "Atina & Midilli (Lesvos)",
+        distance: "✈️ 1 sa Uçuş / ⛴️ Ayvalık",
+        role: "🏛️ Sanat Tarihi Profesörü • ♎ Terazi • 🇬🇷 🇬🇧 🇫🇷 (Biraz 🇹🇷)",
+        roots: "Aile Kökü: Ailesi Ayvalık & İstanbul (Heybeliada) kökenli",
+        travel: "Seyahat Planı: Her ay İstanbul ve Ayvalık-Cunda'yı ziyaret ediyor",
+        bioOriginal: "\"Η ζωή ξεκινάει όταν έχεις χρόνο να ταξιδεύεις! Λατρεύω την Κωνσταντινούπολη, το Αϊβαλί, την κλασική μουσική και το ρεμπέτικο. Ψάχνω έναν κύριο με χιούμορ και αγάπη για τη ζωή.\"",
+        bioTranslated: "\"Hayat, seyahat edecek vaktin olduğunda başlar! İstanbul'u, Ayvalık'ı, klasik müziği ve rebetikoyu çok seviyorum. Espritüel, hayatı ve Ege'yi seven olgun bir yol arkadaşı arıyorum.\"",
+        favFood: "Girit Ezmesi, Lakerda & Hünkârbeğendi",
+        drinkSmoke: "Rakı, Ouzo & Şarap / Sigara Yok",
+        badges: ["🌟 50-60+ Seçkin Kulüp", "🏛️ Kültür & Sanat", "🌿 Ayvalık & İstanbul Kökü"],
+        song: "Mikis Theodorakis — Strose To Stroma Sou",
+        photoCaptions: [
+          "1/3 • Katerina — Atina Plaka'da Akşamüstü",
+          "2/3 • Midilli - Ayvalık Yelken Seyri",
+          "3/3 • Akropolis & Ege Sanat Galerisi"
+        ],
+        photos: [
+          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><defs><linearGradient id="kg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1e3a8a"/><stop offset="50%" stop-color="#0284c7"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient></defs><rect width="400" height="350" fill="url(#kg1)"/><circle cx="310" cy="65" r="42" fill="#fde047"/><circle cx="200" cy="135" r="46" fill="#fed7aa"/><path d="M152 135 Q200 58 248 135" fill="#d97706"/><circle cx="184" cy="130" r="4.5" fill="#1e293b"/><circle cx="216" cy="130" r="4.5" fill="#1e293b"/><path d="M186 150 Q200 160 214 150" stroke="#e11d48" stroke-width="3.5" fill="none"/><path d="M125 350 Q200 195 275 350" fill="#f8fafc"/></svg>`,
+          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><rect width="400" height="350" fill="#0369a1"/><circle cx="300" cy="70" r="40" fill="#fde047"/><path d="M200 60 L200 230 L100 230 Z" fill="#ffffff"/><path d="M212 85 L212 230 L300 230 Z" fill="#e2e8f0"/><path d="M85 238 L315 238 L285 275 L115 275 Z" fill="#92400e"/></svg>`,
+          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><rect width="400" height="350" fill="#312e81"/><circle cx="90" cy="70" r="35" fill="#fef08a"/><polygon points="80,150 320,150 200,95" fill="#f8fafc"/><rect x="95" y="150" width="18" height="110" fill="#e2e8f0"/><rect x="145" y="150" width="18" height="110" fill="#e2e8f0"/><rect x="195" y="150" width="18" height="110" fill="#e2e8f0"/><rect x="245" y="150" width="18" height="110" fill="#e2e8f0"/><rect x="290" y="150" width="18" height="110" fill="#e2e8f0"/><rect x="75" y="260" width="250" height="25" fill="#cbd5e1"/></svg>`
+        ]
+      },
+      {
+        country: "TR",
+        age: 39,
+        corridor: "anywhere",
+        matchTag: "🇹🇷 ↔ 🇹🇷 Kendi Kıyım (Tüm Türkiye Geneli)",
+        name: "Defne Kaya, 39",
+        flag: "🇹🇷",
+        city: "Ankara & Bodrum",
+        distance: "📍 Kendi Kıyım (Her Yer)",
+        role: "🍷 Gastronomi Yazarı • ♎ Terazi • 🇹🇷 🇬🇧 🇬🇷",
+        roots: "Aile Kökü: Dedeleri Girit (Crete) & Rodos Göçmeni",
+        travel: "Plan: Beraber Rodos, Sakız veya Dedeağaç'a kaçacak yol arkadaşı!",
+        bioOriginal: "\"Ankara ve Bodrum arasında yaşıyorum; kendi kıyımda şehir veya direkt uçuş sınırı olmadan Ege kültürünü, adaları ve güzel meyhaneleri seven biriyle tanışıp beraber karşı kıyıya tatile gitmek istiyorum 💙\"",
+        bioTranslated: "\"Kendi ülkemde olup Ege ve Yunan adaları ruhunu paylaşabileceğim bir flört ve seyahat arkadaşı arıyorum 💙\"",
+        favFood: "Deniz Börülcesi & Izgara Ahtapot",
+        drinkSmoke: "Rakı & Ouzo / Sigara Yok",
+        badges: ["📍 Tüm Ülke Geneli", "🛂 Yeşil Pasaport / Schengen", "🌿 Girit & Rodos Kökü"],
+        song: "Yeni Türkü & Haris Alexiou — Olmasa Mektubun",
+        photoCaptions: [
+          "1/3 • Defne — Bodrum Marina Gün Batımı",
+          "2/3 • Kos & Rodos Feribot Güvertesi",
+          "3/3 • Ege Mezeleri & Rebetiko Akşamı"
+        ],
+        photos: [
+          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><defs><linearGradient id="dg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#059669"/><stop offset="50%" stop-color="#0284c7"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient></defs><rect width="400" height="350" fill="url(#dg1)"/><circle cx="90" cy="65" r="40" fill="#fde047" opacity="0.9"/><circle cx="200" cy="135" r="46" fill="#fed7aa"/><path d="M152 135 Q200 58 248 135" fill="#78350f"/><circle cx="184" cy="130" r="4.5" fill="#1e293b"/><circle cx="216" cy="130" r="4.5" fill="#1e293b"/><path d="M186 150 Q200 160 214 150" stroke="#e11d48" stroke-width="3.5" fill="none"/><path d="M125 350 Q200 195 275 350" fill="#ec4899"/></svg>`,
+          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><rect width="400" height="350" fill="#0284c7"/><circle cx="310" cy="65" r="38" fill="#fde047"/><path d="M200 60 L200 230 L100 230 Z" fill="#ffffff"/><path d="M85 238 L315 238 L285 275 L115 275 Z" fill="#b45309"/></svg>`,
+          `<svg viewBox="0 0 400 350" preserveAspectRatio="xMidYMid slice" class="w-full h-full"><rect width="400" height="350" fill="#1e1b4b"/><circle cx="80" cy="55" r="9" fill="#fde047"/><circle cx="200" cy="65" r="9" fill="#fde047"/><circle cx="320" cy="55" r="9" fill="#fde047"/><ellipse cx="200" cy="265" rx="145" ry="48" fill="#38bdf8"/></svg>`
+        ]
+      }
+    ];
+
+    let filteredProfiles = [...allProfiles];
+    let currentProfileIndex = 0;
+    let currentDiscoverPhotoIdx = 0;
+    let currentMyPreviewPhotoIdx = 0;
+    let bioTranslatedState = false;
+
+    function syncAgeSliders(changed) {
+      const minInput = document.getElementById("minAgeRange");
+      const maxInput = document.getElementById("maxAgeRange");
+      let minVal = parseInt(minInput.value, 10);
+      let maxVal = parseInt(maxInput.value, 10);
+
+      if (changed === 'min' && minVal > maxVal - 2) {
+        minVal = maxVal - 2;
+        minInput.value = minVal;
+      } else if (changed === 'max' && maxVal < minVal + 2) {
+        maxVal = minVal + 2;
+        maxInput.value = maxVal;
+      }
+
+      const maxDisplay = maxVal >= 60 ? "60+" : String(maxVal);
+      document.getElementById("minAgeValText").textContent = minVal;
+      document.getElementById("maxAgeValText").textContent = maxDisplay;
+
+      const label = `${minVal} – ${maxDisplay} Yaş`;
+      document.getElementById("selectedAgeBadge").textContent = label;
+      const discLabel = document.getElementById("discoverAgeLabel");
+      if (discLabel) discLabel.textContent = label;
+    }
+
+    let isVipGalleryQuota = true;
+
+    function toggleVipGalleryQuota() {
+      isVipGalleryQuota = !isVipGalleryQuota;
+      const pText = document.getElementById("photoQuotaText");
+      const vText = document.getElementById("videoQuotaText");
+      const btn = document.getElementById("quotaTierBtn");
+
+      if (isVipGalleryQuota) {
+        pText.textContent = "📸 Fotoğraf: 4 / 20 (VIP)";
+        vText.textContent = "🎬 Video: 1 / 5 (VIP)";
+        btn.textContent = "👑 VIP Kota Aktif";
+        btn.className = "bg-amber-400 text-slate-950 font-extrabold px-2 py-0.5 rounded text-xs";
+        showToast("👑 VIP Medya Kotası: 20 Fotoğraf ve 5 Kısa Video hakkı aktif!");
+      } else {
+        pText.textContent = "📸 Fotoğraf: 4 / 10 (Standart)";
+        vText.textContent = "🎬 Video: 1 / 2 (Standart)";
+        btn.textContent = "Standart Kota";
+        btn.className = "bg-slate-600 text-white font-bold px-2 py-0.5 rounded text-xs";
+        showToast("Standart Medya Kotası: Maksimum 10 Fotoğraf ve 2 Kısa Video.");
+      }
+    }
+
+    function jumpToProfileByIndex(idx) {
+      filteredProfiles = [...allProfiles];
+      currentProfileIndex = idx;
+      switchTab('discover');
+    }
+
+    function setDiscoverMode(mode) {
+      const btnAcross = document.getElementById("modeAcross");
+      const btnSame = document.getElementById("modeSame");
+      const btnAll = document.getElementById("modeAll");
+      const corridorsBar = document.getElementById("acrossCorridorsBar");
+
+      const inactiveClass = "py-1.5 px-2 rounded-xl text-xs font-semibold text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition flex items-center justify-center gap-1";
+      const activeClass = "py-1.5 px-2 rounded-xl text-xs font-bold bg-sky-600 text-white shadow-sm transition flex items-center justify-center gap-1";
+
+      btnAcross.className = mode === 'across' ? activeClass : inactiveClass;
+      btnSame.className = mode === 'same' ? activeClass : inactiveClass;
+      btnAll.className = mode === 'all' ? activeClass : inactiveClass;
+
+      if (mode === 'across') {
+        corridorsBar.classList.remove("hidden");
+        setCorridorFilter('all');
+      } else if (mode === 'same') {
+        corridorsBar.classList.add("hidden");
+        filteredProfiles = allProfiles.filter(p => p.country === 'TR');
+        document.getElementById("modeIconBadge").textContent = "📍";
+        document.getElementById("routeFilterText").textContent = "Kendi Kıyım: Tüm Ülke Geneli (Uçuş/Sınır Şartı Yok!)";
+        currentProfileIndex = 0;
+        renderProfile();
+      } else {
+        corridorsBar.classList.add("hidden");
+        filteredProfiles = [...allProfiles];
+        document.getElementById("modeIconBadge").textContent = "🌊";
+        document.getElementById("routeFilterText").textContent = "Tüm Ege (18 - 60+ Tüm Yaş Grupları & Kıyılar)";
+        currentProfileIndex = 0;
+        renderProfile();
+      }
+    }
+
+    function setCorridorFilter(corridor) {
+      const ids = { all: 'corrAll', car: 'corrCar', ferry: 'corrFerry', flight: 'corrFlight' };
+      Object.keys(ids).forEach(k => {
+        const el = document.getElementById(ids[k]);
+        if (k === corridor) {
+          el.className = "bg-indigo-600 text-white px-2.5 py-1 rounded-xl text-xs font-bold shrink-0 flex items-center gap-1 shadow-sm";
+        } else {
+          el.className = "bg-[var(--card)] border border-[var(--border)] px-2.5 py-1 rounded-xl text-xs font-semibold shrink-0 flex items-center gap-1";
+        }
+      });
+
+      if (corridor === 'all') {
+        filteredProfiles = allProfiles.filter(p => p.country === 'GR');
+      } else {
+        filteredProfiles = allProfiles.filter(p => p.corridor === corridor);
+      }
+      currentProfileIndex = 0;
+      renderProfile();
+    }
+
+    function renderDiscoverPhoto() {
+      const p = filteredProfiles[currentProfileIndex];
+      document.getElementById("discoverPhotoCanvas").innerHTML = p.photos[currentDiscoverPhotoIdx];
+      [0, 1, 2].forEach(i => {
+        const bar = document.getElementById("discBar" + i);
+        if (bar) bar.className = i === currentDiscoverPhotoIdx ? "h-1.5 flex-1 rounded-full bg-white transition" : "h-1.5 flex-1 rounded-full bg-white/40 transition";
+      });
+    }
+
+    function setDiscoverPhoto(idx) {
+      currentDiscoverPhotoIdx = idx;
+      renderDiscoverPhoto();
+    }
+
+    function nextDiscoverPhoto() {
+      const p = filteredProfiles[currentProfileIndex];
+      currentDiscoverPhotoIdx = (currentDiscoverPhotoIdx + 1) % p.photos.length;
+      renderDiscoverPhoto();
+    }
+
+    function prevDiscoverPhoto() {
+      const p = filteredProfiles[currentProfileIndex];
+      currentDiscoverPhotoIdx = (currentDiscoverPhotoIdx - 1 + p.photos.length) % p.photos.length;
+      renderDiscoverPhoto();
+    }
+
+    function renderProfile() {
+      const p = filteredProfiles[currentProfileIndex];
+      bioTranslatedState = false;
+      currentDiscoverPhotoIdx = 0;
+      renderDiscoverPhoto();
+
+      document.getElementById("profileName").textContent = p.name;
+      document.getElementById("profileFlag").textContent = p.flag;
+      document.getElementById("profileCity").textContent = p.city;
+      document.getElementById("matchTypePill").textContent = p.matchTag;
+      document.getElementById("profileDistance").textContent = p.distance;
+      document.getElementById("profileRole").textContent = p.role;
+      document.getElementById("profileRoots").textContent = p.roots;
+      document.getElementById("profileTravelPlan").textContent = p.travel;
+      document.getElementById("profileBio").textContent = p.bioOriginal;
+      document.getElementById("bioTranslateBtnText").textContent = "AI Çeviriyi Gör (TR/GR)";
+      document.getElementById("profileSong").textContent = p.song;
+
+      document.getElementById("profileDetailsGrid").innerHTML = `
+        <div class="bg-[var(--background)] border border-[var(--border)] rounded-xl px-2.5 py-1.5 flex items-center gap-1.5">
+          <span>🍽️</span>
+          <span class="truncate"><strong>Favori:</strong> ${p.favFood}</span>
+        </div>
+        <div class="bg-[var(--background)] border border-[var(--border)] rounded-xl px-2.5 py-1.5 flex items-center gap-1.5">
+          <span>🍷</span>
+          <span class="truncate">${p.drinkSmoke}</span>
+        </div>
+      `;
+
+      document.getElementById("profileBadges").innerHTML = p.badges.map(b => 
+        `<span class="bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20 px-2.5 py-1 rounded-full text-xs font-medium">${b}</span>`
+      ).join("");
+    }
+
+    function nextProfile(reason) {
+      const card = document.getElementById("profileCard");
+      card.style.transform = reason === 'pass' ? "translateX(-40px) rotate(-4deg)" : "translateX(40px) rotate(4deg)";
+      card.style.opacity = "0.2";
+      setTimeout(() => {
+        currentProfileIndex = (currentProfileIndex + 1) % filteredProfiles.length;
+        renderProfile();
+        card.style.transform = "translateX(0) rotate(0)";
+        card.style.opacity = "1";
+      }, 220);
+    }
+
+    function toggleBioTranslation() {
+      const p = filteredProfiles[currentProfileIndex];
+      bioTranslatedState = !bioTranslatedState;
+      document.getElementById("profileBio").textContent = bioTranslatedState ? p.bioTranslated : p.bioOriginal;
+    }
+
+    function switchTab(tabId) {
+      const tabs = ['discover', 'travel', 'agora', 'chat', 'profile', 'vip'];
+      tabs.forEach(t => {
+        const el = document.getElementById('tab-' + t);
+        if (el) el.classList.add('hidden');
+        const navBtn = document.getElementById('nav-' + t);
+        if (navBtn) {
+          navBtn.className = "flex flex-col items-center justify-center py-1 rounded-xl text-[var(--muted-foreground)] hover:text-[var(--foreground)] font-medium transition relative";
+        }
+      });
+
+      document.getElementById('tab-' + tabId).classList.remove('hidden');
+      const activeNav = document.getElementById('nav-' + tabId);
+      if (activeNav) {
+        activeNav.className = "flex flex-col items-center justify-center py-1 rounded-xl text-sky-600 dark:text-sky-400 font-bold transition relative";
+      }
+      if (tabId === 'discover') renderProfile();
+      document.getElementById('screenContainer').scrollTop = 0;
+    }
+
+    let fsGallerySource = 'discover';
+    let fsGalleryIdx = 0;
+
+    function openFullscreenGallery(source, idx) {
+      fsGallerySource = source;
+      fsGalleryIdx = idx || 0;
+      renderFullscreenGallery();
+      document.getElementById("fullscreenGalleryModal").classList.remove("hidden");
+    }
+
+    function renderFullscreenGallery() {
+      let name = "";
+      let photosList = [];
+      let captionsList = [];
+
+      if (fsGallerySource === 'my') {
+        name = document.getElementById("myNameInput").value + " 🇹🇷";
+        photosList = myProfilePhotos.map(x => x.svg);
+        captionsList = myProfilePhotos.map(x => x.caption);
+      } else {
+        const p = filteredProfiles[currentProfileIndex];
+        name = p.name + " " + p.flag;
+        photosList = p.photos;
+        captionsList = p.photoCaptions || p.photos.map((_, i) => `Fotoğraf ${i + 1}`);
+      }
+
+      document.getElementById("fsGalleryName").textContent = name;
+      document.getElementById("fsGalleryCounter").textContent = `Fotoğraf ${fsGalleryIdx + 1} / ${photosList.length} • Tam Ekran Galeri Modu`;
+      document.getElementById("fsGalleryCanvas").innerHTML = photosList[fsGalleryIdx];
+      document.getElementById("fsGalleryCaption").textContent = captionsList[fsGalleryIdx] || "";
+
+      const thumbsContainer = document.getElementById("fsGalleryThumbs");
+      thumbsContainer.innerHTML = photosList.map((svgStr, i) => `
+        <button onclick="fsGalleryIdx=${i}; renderFullscreenGallery()" class="w-14 h-14 rounded-xl overflow-hidden border-2 transition ${i === fsGalleryIdx ? 'border-amber-400 scale-105 shadow-lg' : 'border-white/25 opacity-60 hover:opacity-100'}">
+          ${svgStr}
+        </button>
+      `).join('');
+    }
+
+    function stepFullscreenGallery(delta) {
+      const len = fsGallerySource === 'my' ? myProfilePhotos.length : filteredProfiles[currentProfileIndex].photos.length;
+      fsGalleryIdx = (fsGalleryIdx + delta + len) % len;
+      if (fsGallerySource === 'discover') {
+        currentDiscoverPhotoIdx = fsGalleryIdx;
+        renderDiscoverPhoto();
+      }
+      renderFullscreenGallery();
+    }
+
+    function closeFullscreenGallery() {
+      document.getElementById("fullscreenGalleryModal").classList.add("hidden");
+    }
+
+    function openPhotoPreviewModal(photoIdx) {
+      openFullscreenGallery('my', photoIdx);
+    }
+
+    function previewMyCard() {
+      openFullscreenGallery('my', currentMyPreviewPhotoIdx);
+    }
+
+    function changePreviewPhoto(idx) {
+      currentMyPreviewPhotoIdx = idx;
+      openFullscreenGallery('my', idx);
+    }
+
+    function saveMyProfile() {
+      showToast("✅ Yaş aralığın (18 - 60+) ve profil tercihlerin kaydedildi!");
+      setTimeout(() => switchTab('discover'), 800);
+    }
+
+    function openActionModal(type) {
+      const p = filteredProfiles[currentProfileIndex];
+      const modal = document.getElementById("actionModal");
+      document.getElementById("modalTitle").innerHTML = `💙 ${p.matchTag}`;
+      document.getElementById("modalBody").innerHTML = `
+        <div class="text-center space-y-2 py-2">
+          <h4 class="font-bold text-base">${p.name} (${p.distance})</h4>
+          <p class="text-xs text-emerald-600 dark:text-emerald-400 font-semibold">${p.roots}</p>
+          <p class="text-xs text-[var(--muted-foreground)]">${p.travel}</p>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="closeActionModal(); switchTab('chat')" class="flex-1 bg-sky-600 text-white font-bold py-2.5 rounded-xl text-xs">💬 Sohbete Git</button>
+          <button onclick="closeActionModal(); nextProfile('like')" class="flex-1 border border-[var(--border)] bg-[var(--background)] font-semibold py-2.5 rounded-xl text-xs">Devam Et</button>
+        </div>
+      `;
+      modal.classList.remove("hidden");
+    }
+
+    // ==================== 8 CUSTOM APP BACKGROUND ATMOSPHERE THEMES ====================
+    const appBackgroundThemes = {
+      sunset_beach: {
+        name: "🌅 Günbatımında Romantik Plaj",
+        short: "Günbatımı",
+        headerClass: "relative z-10 bg-gradient-to-r from-rose-700 via-orange-600 to-amber-500 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500",
+        svg: `<svg viewBox="0 0 420 850" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
+          <defs>
+            <linearGradient id="bgSunset" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#881337"/>
+              <stop offset="40%" stop-color="#ea580c"/>
+              <stop offset="65%" stop-color="#fbbf24"/>
+              <stop offset="66%" stop-color="#0369a1"/>
+              <stop offset="100%" stop-color="#fde68a"/>
+            </linearGradient>
+          </defs>
+          <rect width="420" height="850" fill="url(#bgSunset)"/>
+          <circle cx="210" cy="490" r="85" fill="#fef08a" opacity="0.9"/>
+          <!-- Sun reflection on sea -->
+          <ellipse cx="210" cy="595" rx="65" ry="8" fill="#fef08a" opacity="0.7"/>
+          <ellipse cx="210" cy="625" rx="45" ry="6" fill="#fde047" opacity="0.6"/>
+          <!-- Sandy Beach Shore -->
+          <path d="M0 680 Q210 640 420 690 L420 850 L0 850 Z" fill="#fcd34d"/>
+          <!-- Beach Umbrella & Two Loungers -->
+          <line x1="110" y1="740" x2="135" y2="610" stroke="#78350f" stroke-width="6"/>
+          <path d="M60 620 Q135 555 210 620 Z" fill="#e11d48"/>
+          <rect x="135" y="725" width="55" height="14" rx="4" fill="#ffffff"/>
+          <rect x="205" y="725" width="55" height="14" rx="4" fill="#ffffff"/>
+        </svg>`
+      },
+      sunny_beach: {
+        name: "🏖️ Güneşli Turkuaz Plaj",
+        short: "Güneşli Plaj",
+        headerClass: "relative z-10 bg-gradient-to-r from-sky-500 via-cyan-500 to-teal-400 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500",
+        svg: `<svg viewBox="0 0 420 850" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
+          <rect width="420" height="520" fill="#38bdf8"/>
+          <circle cx="330" cy="140" r="65" fill="#fef08a"/>
+          <rect y="500" width="420" height="190" fill="#06b6d4"/>
+          <path d="M0 670 Q210 640 420 680 L420 850 L0 850 Z" fill="#fef3c7"/>
+          <!-- Blue & White Striped Aegean Umbrella -->
+          <line x1="290" y1="760" x2="275" y2="600" stroke="#92400e" stroke-width="6"/>
+          <path d="M200 615 Q275 545 350 615 Z" fill="#0284c7"/>
+          <!-- Sailboat on Horizon -->
+          <polygon points="110,430 110,495 75,495" fill="#ffffff"/>
+          <polygon points="116,445 116,495 142,495" fill="#f1f5f9"/>
+        </svg>`
+      },
+      taverna: {
+        name: "🏛️ Ege Taverna Sofrası",
+        short: "Taverna",
+        headerClass: "relative z-10 bg-gradient-to-r from-blue-800 via-sky-700 to-indigo-700 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500",
+        svg: `<svg viewBox="0 0 420 850" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
+          <rect width="420" height="850" fill="#1e3a8a"/>
+          <!-- Whitewashed wall & Bougainvillea -->
+          <rect x="0" y="120" width="420" height="450" fill="#f8fafc"/>
+          <circle cx="80" cy="140" r="65" fill="#ec4899"/>
+          <circle cx="170" cy="120" r="55" fill="#db2777"/>
+          <circle cx="340" cy="145" r="70" fill="#ec4899"/>
+          <!-- Blue Window Shutters -->
+          <rect x="145" y="230" width="130" height="180" rx="12" fill="#0284c7"/>
+          <!-- Blue & White Checkered Tablecloth -->
+          <ellipse cx="210" cy="700" rx="195" ry="110" fill="#38bdf8"/>
+          <ellipse cx="210" cy="700" rx="165" ry="88" fill="#ffffff"/>
+          <circle cx="150" cy="690" r="32" fill="#fde047"/>
+          <circle cx="265" cy="705" r="36" fill="#ef4444"/>
+        </svg>`
+      },
+      panigiri: {
+        name: "💃 Panayır Eğlencesi & Dans Eden İnsanlar",
+        short: "Panayır & Dans",
+        headerClass: "relative z-10 bg-gradient-to-r from-purple-800 via-fuchsia-700 to-amber-500 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500",
+        svg: `<svg viewBox="0 0 420 850" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
+          <rect width="420" height="850" fill="#1e1b4b"/>
+          <!-- Festive Panigiri Fairy Lights -->
+          <path d="M0 150 Q210 240 420 140" stroke="#fbbf24" stroke-width="3" fill="none"/>
+          <path d="M0 230 Q210 310 420 220" stroke="#fbbf24" stroke-width="3" fill="none"/>
+          <circle cx="60" cy="168" r="10" fill="#fde047"/>
+          <circle cx="135" cy="186" r="10" fill="#f43f5e"/>
+          <circle cx="210" cy="192" r="10" fill="#fde047"/>
+          <circle cx="285" cy="184" r="10" fill="#38bdf8"/>
+          <circle cx="360" cy="162" r="10" fill="#fde047"/>
+          <!-- Dancing People Silhouettes (Sirtaki / Zeybek arms linked) -->
+          <circle cx="105" cy="540" r="24" fill="#fbbf24"/>
+          <path d="M75 680 L105 565 L135 680 Z" fill="#f43f5e"/>
+          <circle cx="210" cy="525" r="26" fill="#fbbf24"/>
+          <path d="M175 680 L210 555 L245 680 Z" fill="#38bdf8"/>
+          <circle cx="315" cy="540" r="24" fill="#fbbf24"/>
+          <path d="M285 680 L315 565 L345 680 Z" fill="#a855f7"/>
+          <!-- Linked Arms Dancing -->
+          <path d="M60 575 L105 585 L210 570 L315 585 L365 570" stroke="#fde047" stroke-width="8" stroke-linecap="round" fill="none"/>
+        </svg>`
+      },
+      romantic_dinner: {
+        name: "🕯️ Romantik Akşam Yemeği",
+        short: "Romantik Yemek",
+        headerClass: "relative z-10 bg-gradient-to-r from-slate-900 via-rose-900 to-amber-700 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500",
+        svg: `<svg viewBox="0 0 420 850" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
+          <rect width="420" height="850" fill="#0f172a"/>
+          <!-- Full Moon & Stars over Sea -->
+          <circle cx="320" cy="170" r="48" fill="#fef9c3" opacity="0.9"/>
+          <path d="M0 520 Q210 500 420 520 L420 850 L0 850 Z" fill="#1e293b"/>
+          <!-- Candlelit Round Table -->
+          <ellipse cx="210" cy="710" rx="175" ry="85" fill="#fff1f2"/>
+          <!-- Glowing Candle -->
+          <rect x="200" y="615" width="20" height="65" rx="4" fill="#ffffff"/>
+          <circle cx="210" cy="595" r="28" fill="#fbbf24" opacity="0.45"/>
+          <path d="M210 575 Q222 595 210 612 Q198 595 210 575 Z" fill="#f59e0b"/>
+          <!-- Two Red Wine Glasses -->
+          <ellipse cx="135" cy="645" rx="18" ry="22" fill="#be123c"/>
+          <line x1="135" y1="667" x2="135" y2="705" stroke="#94a3b8" stroke-width="4"/>
+          <ellipse cx="285" cy="645" rx="18" ry="22" fill="#be123c"/>
+          <line x1="285" y1="667" x2="285" y2="705" stroke="#94a3b8" stroke-width="4"/>
+        </svg>`
+      },
+      seafood_salad: {
+        name: "🥗 Deniz Ürünleri Salatası & Akdeniz Sofrası",
+        short: "Deniz Salatası",
+        headerClass: "relative z-10 bg-gradient-to-r from-emerald-700 via-teal-600 to-cyan-600 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500",
+        svg: `<svg viewBox="0 0 420 850" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
+          <rect width="420" height="850" fill="#065f46"/>
+          <!-- Wooden Mediterranean Table & Ceramic Bowl -->
+          <circle cx="210" cy="560" r="165" fill="#ffffff"/>
+          <circle cx="210" cy="560" r="142" fill="#ecfdf5"/>
+          <!-- Greens, Shrimp, Octopus rings, Cherry Tomatoes & Lemon -->
+          <circle cx="165" cy="515" r="35" fill="#22c55e"/>
+          <circle cx="255" cy="525" r="38" fill="#16a34a"/>
+          <circle cx="195" cy="605" r="40" fill="#15803d"/>
+          <circle cx="155" cy="575" r="22" fill="#ef4444"/>
+          <circle cx="260" cy="590" r="22" fill="#ef4444"/>
+          <circle cx="215" cy="535" r="28" fill="#fb923c"/>
+          <circle cx="210" cy="475" r="24" fill="#fde047"/>
+        </svg>`
+      },
+      raki_table: {
+        name: "🥃 Rakı & Ouzo Sofrası (İki Kıyı Keyfi)",
+        short: "Rakı / Ouzo",
+        headerClass: "relative z-10 bg-gradient-to-r from-sky-800 via-blue-700 to-cyan-600 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500",
+        svg: `<svg viewBox="0 0 420 850" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
+          <rect width="420" height="850" fill="#0c4a6e"/>
+          <circle cx="330" cy="180" r="50" fill="#fde047" opacity="0.8"/>
+          <!-- Table at Seaside -->
+          <rect x="0" y="620" width="420" height="230" fill="#0284c7"/>
+          <!-- Two Tall Milky-White Rakı / Ouzo Glasses Clinking -->
+          <rect x="135" y="485" width="38" height="115" rx="6" fill="#f8fafc" opacity="0.92"/>
+          <rect x="235" y="485" width="38" height="115" rx="6" fill="#f8fafc" opacity="0.92"/>
+          <!-- Melon & White Feta Cheese Plate -->
+          <ellipse cx="210" cy="690" rx="115" ry="38" fill="#ffffff"/>
+          <path d="M135 685 Q210 730 285 685 Z" fill="#f59e0b"/>
+          <rect x="185" y="655" width="50" height="32" rx="4" fill="#fef9c3"/>
+        </svg>`
+      },
+      fish_feast: {
+        name: "🐟 Balık Yemekleri & Sahil Sofrası",
+        short: "Balık Sofrası",
+        headerClass: "relative z-10 bg-gradient-to-r from-cyan-800 via-sky-700 to-blue-600 text-white px-4 pt-3 pb-3 shrink-0 shadow-md transition-all duration-500",
+        svg: `<svg viewBox="0 0 420 850" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
+          <rect width="420" height="850" fill="#075985"/>
+          <!-- Platter with Grilled Sea Bream / Fish & Lemon Slices -->
+          <ellipse cx="210" cy="560" rx="175" ry="95" fill="#ffffff"/>
+          <ellipse cx="210" cy="560" rx="150" ry="75" fill="#f0f9ff"/>
+          <!-- Stylized Grilled Fish -->
+          <path d="M95 560 Q205 495 305 560 Q205 625 95 560 Z" fill="#d97706"/>
+          <polygon points="300,560 345,525 345,595" fill="#b45309"/>
+          <circle cx="130" cy="552" r="6" fill="#ffffff"/>
+          <!-- Lemon & Arugula Garnish -->
+          <circle cx="185" cy="520" r="18" fill="#fde047"/>
+          <circle cx="235" cy="600" r="18" fill="#fde047"/>
+          <circle cx="255" cy="520" r="20" fill="#22c55e"/>
+        </svg>`
+      }
+    };
+
+    let currentBgKey = "sunset_beach";
+    let isShowcaseMode = false;
+
+    function setAppBackground(themeKey) {
+      currentBgKey = themeKey;
+      const theme = appBackgroundThemes[themeKey];
+      if (!theme) return;
+
+      const bgLayer = document.getElementById("appBackgroundLayer");
+      bgLayer.innerHTML = theme.svg;
+      bgLayer.style.opacity = isShowcaseMode ? "0.95" : "0.42";
+
+      document.getElementById("appHeaderBar").className = theme.headerClass;
+      document.getElementById("headerSubtitle").textContent = theme.name + " • 🇹🇷 & 🇬🇷";
+      document.getElementById("activeBgShortLabel").textContent = theme.short;
+
+      // Update active button border on right panel
+      document.querySelectorAll('.bg-theme-btn').forEach(btn => {
+        btn.className = "bg-theme-btn border border-[var(--border)] bg-[var(--background)] hover:border-sky-500 rounded-xl p-2.5 text-left transition";
+      });
+      const activeBtn = document.getElementById("bgBtn-" + themeKey);
+      if (activeBtn) {
+        activeBtn.className = "bg-theme-btn border-2 border-amber-500 bg-amber-500/15 rounded-xl p-2.5 text-left transition shadow-sm";
+      }
+
+      showToast("🎨 Arka Plan Değiştirildi: " + theme.name);
+    }
+
+    function toggleWallpaperShowcase() {
+      isShowcaseMode = !isShowcaseMode;
+      const bgLayer = document.getElementById("appBackgroundLayer");
+      const screenContainer = document.getElementById("screenContainer");
+      const btn = document.getElementById("showcaseBgBtn");
+
+      if (isShowcaseMode) {
+        bgLayer.style.opacity = "0.98";
+        screenContainer.style.opacity = "0.12";
+        btn.textContent = "📱 Kartları Geri Getir";
+      } else {
+        bgLayer.style.opacity = "0.42";
+        screenContainer.style.opacity = "1";
+        btn.textContent = "🖼️ Arka Planı Net Gör";
+      }
+    }
+
+    function openBgSelectorModal() {
+      const modal = document.getElementById("actionModal");
+      document.getElementById("modalTitle").innerHTML = "🎨 Uygulama Arka Planını Seç";
+      document.getElementById("modalBody").innerHTML = `
+        <p class="text-[var(--muted-foreground)]">Uygulamanın arka plan atmosferini ruh haline göre seç:</p>
+        <div class="grid grid-cols-2 gap-2">
+          ${Object.keys(appBackgroundThemes).map(k => {
+            const t = appBackgroundThemes[k];
+            const isSel = k === currentBgKey;
+            return `
+              <button onclick="setAppBackground('${k}'); closeActionModal()" class="p-2.5 rounded-xl text-left border ${isSel ? 'border-2 border-amber-500 bg-amber-500/15 font-bold' : 'border-[var(--border)] bg-[var(--background)]'}">
+                <div class="text-xs font-bold">${t.name}</div>
+              </button>
+            `;
+          }).join('')}
+        </div>
+      `;
+      modal.classList.remove("hidden");
+    }
+
+    function closeActionModal() {
+      document.getElementById("actionModal").classList.add("hidden");
+    }
+
+    function sendUserChat() {
+      const input = document.getElementById("chatInput");
+      if (!input.value.trim()) return;
+      const stream = document.getElementById("chatMessages");
+      const msgDiv = document.createElement("div");
+      msgDiv.className = "flex flex-col items-end ml-auto max-w-[88%]";
+      msgDiv.innerHTML = `<div class="bg-sky-600 text-white rounded-2xl rounded-tr-sm p-3 shadow-sm"><p class="text-xs font-medium">${input.value}</p></div>`;
+      stream.appendChild(msgDiv);
+      input.value = "";
+    }
+
+    function openShieldReportModal() {
+      showToast("🛡️ Ege Kalkanı aktif.");
+    }
+
+    function cycleLanguage() {
+      showToast("🌐 TR / EL / EN Dil Değiştirildi");
+    }
+
+    function showToast(msg) {
+      const box = document.getElementById("toastBox");
+      document.getElementById("toastText").textContent = msg;
+      box.classList.remove("hidden");
+      setTimeout(() => box.classList.add("hidden"), 3000);
+    }
+
+    // Initialize default background & Discover tab
+    setAppBackground('sunset_beach');
+    switchTab('discover');
+  </script>
+</body>
+</html>
