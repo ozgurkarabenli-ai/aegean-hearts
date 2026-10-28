@@ -99,16 +99,16 @@
         <div id="tab-discover" class="p-3.5 space-y-2.5">
           
           <!-- 3-Way Match Mode Switcher -->
-          <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-1 grid grid-cols-3 gap-1 shadow-sm">
+          <div class="bg-black/60 backdrop-blur-md border border-white/15 rounded-2xl p-1 grid grid-cols-3 gap-1 shadow-sm">
             <button id="modeAcross" onclick="setDiscoverMode('across')" class="py-1.5 px-2 rounded-xl text-xs font-bold bg-sky-600 text-white shadow-sm transition flex items-center justify-center gap-1">
               <span>🧭</span>
               <span>Karşı Kıyı</span>
             </button>
-            <button id="modeSame" onclick="setDiscoverMode('same')" class="py-1.5 px-2 rounded-xl text-xs font-semibold text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition flex items-center justify-center gap-1">
+            <button id="modeSame" onclick="setDiscoverMode('same')" class="py-1.5 px-2 rounded-xl text-xs font-semibold text-slate-200 hover:text-white transition flex items-center justify-center gap-1">
               <span>📍</span>
               <span>Kendi Kıyım</span>
             </button>
-            <button id="modeAll" onclick="setDiscoverMode('all')" class="py-1.5 px-2 rounded-xl text-xs font-semibold text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition flex items-center justify-center gap-1">
+            <button id="modeAll" onclick="setDiscoverMode('all')" class="py-1.5 px-2 rounded-xl text-xs font-semibold text-slate-200 hover:text-white transition flex items-center justify-center gap-1">
               <span>🌊</span>
               <span>Tüm Ege</span>
             </button>
@@ -120,37 +120,37 @@
               <button id="corrAll" onclick="setCorridorFilter('all')" class="bg-indigo-600 text-white px-2.5 py-1 rounded-xl text-xs font-bold shrink-0">
                 ⚡ Tüm Yakın Hatlar
               </button>
-              <button id="corrCar" onclick="setCorridorFilter('car')" class="bg-[var(--card)] border border-[var(--border)] px-2.5 py-1 rounded-xl text-xs font-semibold shrink-0 flex items-center gap-1">
+              <button id="corrCar" onclick="setCorridorFilter('car')" class="bg-black/60 backdrop-blur-md text-white border border-white/15 px-2.5 py-1 rounded-xl text-xs font-semibold shrink-0 flex items-center gap-1">
                 <span>🚗</span>
                 <span>Araba (Edirne ↔ Dedeağaç/Kavala)</span>
               </button>
-              <button id="corrFerry" onclick="setCorridorFilter('ferry')" class="bg-[var(--card)] border border-[var(--border)] px-2.5 py-1 rounded-xl text-xs font-semibold shrink-0 flex items-center gap-1">
+              <button id="corrFerry" onclick="setCorridorFilter('ferry')" class="bg-black/60 backdrop-blur-md text-white border border-white/15 px-2.5 py-1 rounded-xl text-xs font-semibold shrink-0 flex items-center gap-1">
                 <span>⛴️</span>
                 <span>Feribot (Çeşme/Marmaris ↔ Adalar)</span>
               </button>
-              <button id="corrFlight" onclick="setCorridorFilter('flight')" class="bg-[var(--card)] border border-[var(--border)] px-2.5 py-1 rounded-xl text-xs font-semibold shrink-0 flex items-center gap-1">
+              <button id="corrFlight" onclick="setCorridorFilter('flight')" class="bg-black/60 backdrop-blur-md text-white border border-white/15 px-2.5 py-1 rounded-xl text-xs font-semibold shrink-0 flex items-center gap-1">
                 <span>✈️</span>
                 <span>Direkt Uçuş (İst/İzmir ↔ Atina/Selanik)</span>
               </button>
             </div>
           </div>
 
-          <!-- Active Mode & Age Filter Banner -->
-          <div class="bg-sky-500/10 border border-sky-500/30 rounded-xl px-3 py-2 flex items-center justify-between text-xs gap-2">
+          <!-- Active Mode & Age Filter Banner (60% Black Transparent) -->
+          <div class="bg-black/60 backdrop-blur-md border border-sky-400/30 rounded-xl px-3 py-2 flex items-center justify-between text-xs gap-2 text-white shadow">
             <div class="flex items-center gap-2">
               <span id="modeIconBadge" class="text-base">🚗</span>
               <div>
-                <div class="font-bold text-sky-600 dark:text-sky-400" id="routeFilterText">Karşı Kıyı: Araba, Feribot & Direkt Uçuş</div>
-                <div class="text-[var(--muted-foreground)]" id="routeFilterSub">Aktif Yaş Filtresi: <strong id="discoverAgeLabel">Tüm Yaşlar (25 - 60+)</strong></div>
+                <div class="font-bold text-sky-300" id="routeFilterText">Karşı Kıyı: Araba, Feribot & Direkt Uçuş</div>
+                <div class="text-slate-200" id="routeFilterSub">Aktif Yaş Filtresi: <strong id="discoverAgeLabel" class="text-amber-300">Tüm Yaşlar (25 - 60+)</strong></div>
               </div>
             </div>
-            <button onclick="switchTab('profile')" class="bg-sky-600 text-white font-bold px-2.5 py-1 rounded-lg shrink-0">
+            <button onclick="switchTab('profile')" class="bg-sky-600 hover:bg-sky-500 text-white font-bold px-2.5 py-1 rounded-lg shrink-0">
               Yaş & Filtre
             </button>
           </div>
 
-          <!-- PROFILE CARD -->
-          <div id="profileCard" class="card-transition bg-[var(--card)] border border-[var(--border)] rounded-3xl overflow-hidden shadow-lg relative">
+          <!-- PROFILE CARD (60% Black Transparent Container) -->
+          <div id="profileCard" class="card-transition bg-black/60 backdrop-blur-md border border-white/15 rounded-3xl overflow-hidden shadow-lg relative text-white">
             
             <!-- Interactive Multi-Photo Gallery on Discover Card (Larger 350px & Unobstructed) -->
             <div class="relative overflow-hidden bg-slate-900 text-white select-none group" style="height: 350px;">
@@ -166,15 +166,15 @@
 
               <!-- Left / Right Photo Tap Zones -->
               <button onclick="event.stopPropagation(); prevDiscoverPhoto()" class="absolute inset-y-12 left-0 w-12 z-20 flex items-center justify-center">
-                <span class="bg-black/50 hover:bg-black/80 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shadow">‹</span>
+                <span class="bg-black/60 hover:bg-black/80 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shadow">‹</span>
               </button>
               <button onclick="event.stopPropagation(); nextDiscoverPhoto()" class="absolute inset-y-12 right-0 w-12 z-20 flex items-center justify-center">
-                <span class="bg-black/50 hover:bg-black/80 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shadow">›</span>
+                <span class="bg-black/60 hover:bg-black/80 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shadow">›</span>
               </button>
 
               <!-- Minimal Top Strip: Location + Fullscreen Gallery Button -->
               <div class="absolute top-6 inset-x-3 z-20 flex justify-between items-center gap-2">
-                <span class="bg-black/55 backdrop-blur-md text-white px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1 pointer-events-none">
+                <span class="bg-black/60 backdrop-blur-md text-white px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1 pointer-events-none">
                   <span id="profileFlag">🇬🇷</span>
                   <span id="profileCity">Alexandroupoli (Dedeağaç)</span>
                 </span>
@@ -184,8 +184,8 @@
                 </button>
               </div>
 
-              <!-- Clean, Compact Bottom Overlay (Doesn't cover the photo!) -->
-              <div onclick="openFullscreenGallery('discover', currentDiscoverPhotoIdx)" class="absolute bottom-0 inset-x-0 z-10 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-3.5 pt-8 cursor-zoom-in flex items-end justify-between">
+              <!-- Clean, Compact Bottom Overlay (60% Black Transparent for Easy Reading!) -->
+              <div onclick="openFullscreenGallery('discover', currentDiscoverPhotoIdx)" class="absolute bottom-0 inset-x-0 z-10 bg-black/60 backdrop-blur-sm border-t border-white/10 p-3 cursor-zoom-in flex items-end justify-between">
                 <div>
                   <h2 class="text-xl font-bold flex items-center gap-2 drop-shadow">
                     <span id="profileName">Maria Nikolaou, 28</span>
@@ -198,41 +198,41 @@
               </div>
             </div>
 
-            <!-- Card Body: Route, Roots, Bio, Lifestyle Details & Spotify (Moved below photo so photo stays clean!) -->
-            <div class="p-3.5 space-y-2.5">
-              <!-- Route & Family Roots Info (Cleanly below the photo) -->
+            <!-- Card Body: Route, Roots, Bio, Lifestyle Details & Spotify (60% Black Transparent Readability) -->
+            <div class="p-3.5 space-y-2.5 bg-black/60">
+              <!-- Route & Family Roots Info -->
               <div class="space-y-1.5">
                 <div class="flex items-center justify-between gap-1.5">
-                  <span id="matchTypePill" class="bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 border border-indigo-500/30 px-2.5 py-1 rounded-lg text-xs font-bold">
+                  <span id="matchTypePill" class="bg-indigo-500/30 text-indigo-200 border border-indigo-400/40 px-2.5 py-1 rounded-lg text-xs font-bold">
                     🚗 Edirne ↔ Dedeağaç Hattı
                   </span>
-                  <span class="bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 px-2.5 py-1 rounded-lg text-xs font-semibold truncate" id="profileRoots">
+                  <span class="bg-emerald-500/30 text-emerald-200 border border-emerald-400/40 px-2.5 py-1 rounded-lg text-xs font-semibold truncate" id="profileRoots">
                     🌿 Dedeleri Edirne kökenli
                   </span>
                 </div>
-                <div class="bg-amber-500/15 border border-amber-500/30 text-amber-800 dark:text-amber-300 rounded-xl px-3 py-1.5 text-xs font-semibold flex items-center gap-1.5">
+                <div class="bg-amber-500/25 border border-amber-400/40 text-amber-200 rounded-xl px-3 py-1.5 text-xs font-semibold flex items-center gap-1.5">
                   <span>✈️</span>
                   <span id="profileTravelPlan">Rota: Bu Cumartesi arabayla Edirne & Tekirdağ'da!</span>
                 </div>
               </div>
-              <div class="bg-[var(--background)] border border-[var(--border)] rounded-2xl p-2.5">
+              <div class="bg-black/60 border border-white/15 rounded-2xl p-2.5">
                 <div class="flex justify-between items-center mb-1">
-                  <span class="text-xs font-semibold text-[var(--muted-foreground)]">Hakkımda & Ne Arıyorum</span>
-                  <button onclick="toggleBioTranslation()" class="text-xs font-semibold text-sky-600 dark:text-sky-400 flex items-center gap-1 hover:underline">
+                  <span class="text-xs font-semibold text-slate-300">Hakkımda & Ne Arıyorum</span>
+                  <button onclick="toggleBioTranslation()" class="text-xs font-semibold text-sky-300 flex items-center gap-1 hover:underline">
                     <span>🌐</span>
                     <span id="bioTranslateBtnText">AI Çeviriyi Gör (TR/GR)</span>
                   </button>
                 </div>
-                <p id="profileBio" class="text-xs leading-relaxed"></p>
+                <p id="profileBio" class="text-xs leading-relaxed text-white"></p>
               </div>
 
               <div class="grid grid-cols-2 gap-1.5 text-xs" id="profileDetailsGrid"></div>
               <div id="profileBadges" class="flex flex-wrap gap-1.5"></div>
 
-              <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-2 flex items-center justify-between">
+              <div class="bg-emerald-950/70 border border-emerald-400/30 rounded-2xl p-2 flex items-center justify-between">
                 <div class="flex items-center gap-2">
                   <div class="w-7 h-7 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-xs font-bold shrink-0">🎵</div>
-                  <div id="profileSong" class="text-xs font-bold">Thodoris Ferris — Mataia</div>
+                  <div id="profileSong" class="text-xs font-bold text-white">Thodoris Ferris — Mataia</div>
                 </div>
                 <button onclick="openActionModal('spotify')" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-2.5 py-1 rounded-xl transition shrink-0">
                   Şarkı Gönder
@@ -241,21 +241,21 @@
 
               <!-- 5 ACTION BUTTONS BAR -->
               <div class="pt-0.5 grid grid-cols-5 gap-2 items-center">
-                <button onclick="nextProfile('pass')" class="h-11 rounded-2xl border border-[var(--border)] bg-[var(--background)] hover:bg-rose-500/10 flex flex-col items-center justify-center transition">
+                <button onclick="nextProfile('pass')" class="h-11 rounded-2xl border border-white/20 bg-black/60 hover:bg-rose-500/20 flex flex-col items-center justify-center transition">
                   <span class="text-base">✖️</span>
-                  <span class="text-xs text-[var(--muted-foreground)]">Geç</span>
+                  <span class="text-xs text-slate-200">Geç</span>
                 </button>
-                <button onclick="openActionModal('mati')" class="h-11 rounded-2xl border border-sky-500/40 bg-sky-500/10 hover:bg-sky-500/20 flex flex-col items-center justify-center transition">
+                <button onclick="openActionModal('mati')" class="h-11 rounded-2xl border border-sky-400/40 bg-sky-950/70 hover:bg-sky-900/80 flex flex-col items-center justify-center transition">
                   <span class="text-base">🧿</span>
-                  <span class="text-xs font-semibold text-sky-600 dark:text-sky-400">Mati</span>
+                  <span class="text-xs font-semibold text-sky-300">Mati</span>
                 </button>
                 <button onclick="openActionModal('coffee')" class="h-12 rounded-2xl bg-gradient-to-b from-amber-400 to-amber-500 text-slate-950 font-bold shadow-md hover:brightness-105 flex flex-col items-center justify-center transition">
                   <span class="text-lg">☕</span>
                   <span class="text-xs font-bold">Kahve</span>
                 </button>
-                <button onclick="openActionModal('spotify')" class="h-11 rounded-2xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 flex flex-col items-center justify-center transition">
+                <button onclick="openActionModal('spotify')" class="h-11 rounded-2xl border border-emerald-400/40 bg-emerald-950/70 hover:bg-emerald-900/80 flex flex-col items-center justify-center transition">
                   <span class="text-base">🎵</span>
-                  <span class="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Şarkı</span>
+                  <span class="text-xs font-semibold text-emerald-300">Şarkı</span>
                 </button>
                 <button onclick="openActionModal('match')" class="h-11 rounded-2xl bg-rose-500 hover:bg-rose-600 text-white shadow flex flex-col items-center justify-center transition">
                   <span class="text-base">💙</span>
@@ -269,36 +269,36 @@
 
         <!-- ==================== TAB 2: SEYAHAT & ORTAK TATİL TAKVİMİ ==================== -->
         <div id="tab-travel" class="p-3.5 space-y-4 hidden">
-          <div class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-2xl p-4 shadow">
-            <h3 class="font-bold text-base">🚗⛴️✈️ Sınır Ötesi Rotalar & Ortak Tatiller</h3>
-            <p class="text-xs text-sky-100 mt-0.5">Araba ile Edirne-Dedeağaç, Feribot ile Çeşme-Sakız / Marmaris-Rodos veya Uçak ile İstanbul-Atina!</p>
+          <div class="bg-black/60 backdrop-blur-md border border-sky-400/30 text-white rounded-2xl p-4 shadow">
+            <h3 class="font-bold text-base text-sky-300">🚗⛴️✈️ Sınır Ötesi Rotalar & Ortak Tatiller</h3>
+            <p class="text-xs text-slate-200 mt-0.5">Araba ile Edirne-Dedeağaç, Feribot ile Çeşme-Sakız / Marmaris-Rodos veya Uçak ile İstanbul-Atina!</p>
           </div>
 
-          <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-3.5 space-y-2.5 shadow-sm">
-            <h4 class="font-bold text-sm">🛣️ Popüler Karşı Kıyı Koridorları</h4>
+          <div class="bg-black/60 backdrop-blur-md border border-white/15 text-white rounded-2xl p-3.5 space-y-2.5 shadow-sm">
+            <h4 class="font-bold text-sm text-amber-300">🛣️ Popüler Karşı Kıyı Koridorları</h4>
             <div class="space-y-2 text-xs">
-              <div class="border border-[var(--border)] bg-[var(--background)] rounded-xl p-2.5 flex justify-between items-center">
+              <div class="border border-white/15 bg-black/60 rounded-xl p-2.5 flex justify-between items-center">
                 <div>
-                  <div class="font-bold">🚗 Trakya Karayolu Hattı (İpsala / Pazarkule)</div>
-                  <div class="text-[var(--muted-foreground)]">Edirne / Tekirdağ / İst ↔ Alexandroupoli, Kavala, Selanik</div>
+                  <div class="font-bold text-white">🚗 Trakya Karayolu Hattı (İpsala / Pazarkule)</div>
+                  <div class="text-slate-300">Edirne / Tekirdağ / İst ↔ Alexandroupoli, Kavala, Selanik</div>
                 </div>
-                <span class="bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-bold px-2 py-1 rounded">35 dk - 2 sa</span>
+                <span class="bg-emerald-500/25 text-emerald-300 font-bold px-2 py-1 rounded">35 dk - 2 sa</span>
               </div>
 
-              <div class="border border-[var(--border)] bg-[var(--background)] rounded-xl p-2.5 flex justify-between items-center">
+              <div class="border border-white/15 bg-black/60 rounded-xl p-2.5 flex justify-between items-center">
                 <div>
-                  <div class="font-bold">⛴️ Ege Feribot Hattı (Kıyı ↔ Adalar)</div>
-                  <div class="text-[var(--muted-foreground)]">Ayvalık↔Midilli, Çeşme↔Sakız, Bodrum↔Kos, Marmaris↔Rodos</div>
+                  <div class="font-bold text-white">⛴️ Ege Feribot Hattı (Kıyı ↔ Adalar)</div>
+                  <div class="text-slate-300">Ayvalık↔Midilli, Çeşme↔Sakız, Bodrum↔Kos, Marmaris↔Rodos</div>
                 </div>
-                <span class="bg-sky-500/15 text-sky-600 dark:text-sky-400 font-bold px-2 py-1 rounded">30 - 60 dk</span>
+                <span class="bg-sky-500/25 text-sky-300 font-bold px-2 py-1 rounded">30 - 60 dk</span>
               </div>
 
-              <div class="border border-[var(--border)] bg-[var(--background)] rounded-xl p-2.5 flex justify-between items-center">
+              <div class="border border-white/15 bg-black/60 rounded-xl p-2.5 flex justify-between items-center">
                 <div>
-                  <div class="font-bold">✈️ Direkt Hava Koridoru</div>
-                  <div class="text-[var(--muted-foreground)]">İstanbul / İzmir / Antalya ↔ Atina & Selanik</div>
+                  <div class="font-bold text-white">✈️ Direkt Hava Koridoru</div>
+                  <div class="text-slate-300">İstanbul / İzmir / Antalya ↔ Atina & Selanik</div>
                 </div>
-                <span class="bg-amber-500/15 text-amber-600 dark:text-amber-400 font-bold px-2 py-1 rounded">1 sa 15 dk</span>
+                <span class="bg-amber-500/25 text-amber-300 font-bold px-2 py-1 rounded">1 sa 15 dk</span>
               </div>
             </div>
           </div>
@@ -597,26 +597,26 @@
         <span id="toastText">Bildirim</span>
       </div>
 
-      <!-- PWA BOTTOM NAVIGATION BAR -->
-      <div class="bg-[var(--card)] border-t border-[var(--border)] px-2 py-2 grid grid-cols-5 gap-1 shrink-0">
-        <button onclick="switchTab('discover')" id="nav-discover" class="flex flex-col items-center justify-center py-1 rounded-xl text-[var(--muted-foreground)] hover:text-[var(--foreground)] font-medium transition">
+      <!-- PWA BOTTOM NAVIGATION BAR (60% Black Transparent & Above Wallpaper) -->
+      <div class="relative z-10 bg-black/60 backdrop-blur-md border-t border-white/15 px-2 py-2 grid grid-cols-5 gap-1 shrink-0">
+        <button onclick="switchTab('discover')" id="nav-discover" class="flex flex-col items-center justify-center py-1 rounded-xl text-slate-200 hover:text-white font-medium transition">
           <span class="text-lg">🔥</span>
           <span class="text-xs">Keşfet</span>
         </button>
-        <button onclick="switchTab('travel')" id="nav-travel" class="flex flex-col items-center justify-center py-1 rounded-xl text-[var(--muted-foreground)] hover:text-[var(--foreground)] font-medium transition">
+        <button onclick="switchTab('travel')" id="nav-travel" class="flex flex-col items-center justify-center py-1 rounded-xl text-slate-200 hover:text-white font-medium transition">
           <span class="text-lg">✈️</span>
           <span class="text-xs">Seyahat</span>
         </button>
-        <button onclick="switchTab('agora')" id="nav-agora" class="flex flex-col items-center justify-center py-1 rounded-xl text-[var(--muted-foreground)] hover:text-[var(--foreground)] font-medium transition">
+        <button onclick="switchTab('agora')" id="nav-agora" class="flex flex-col items-center justify-center py-1 rounded-xl text-slate-200 hover:text-white font-medium transition">
           <span class="text-lg">🏛️</span>
           <span class="text-xs">Meydan</span>
         </button>
-        <button onclick="switchTab('chat')" id="nav-chat" class="flex flex-col items-center justify-center py-1 rounded-xl text-[var(--muted-foreground)] hover:text-[var(--foreground)] font-medium transition relative">
+        <button onclick="switchTab('chat')" id="nav-chat" class="flex flex-col items-center justify-center py-1 rounded-xl text-slate-200 hover:text-white font-medium transition relative">
           <span class="text-lg">💬</span>
           <span class="text-xs">Sohbet</span>
           <span class="absolute top-0.5 right-3 w-2 h-2 bg-rose-500 rounded-full"></span>
         </button>
-        <button onclick="switchTab('profile')" id="nav-profile" class="flex flex-col items-center justify-center py-1 rounded-xl text-sky-600 dark:text-sky-400 font-bold transition relative">
+        <button onclick="switchTab('profile')" id="nav-profile" class="flex flex-col items-center justify-center py-1 rounded-xl text-sky-400 font-bold transition relative">
           <span class="text-lg">👤</span>
           <span class="text-xs">Profilim</span>
         </button>
@@ -938,7 +938,7 @@
       const btnAll = document.getElementById("modeAll");
       const corridorsBar = document.getElementById("acrossCorridorsBar");
 
-      const inactiveClass = "py-1.5 px-2 rounded-xl text-xs font-semibold text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition flex items-center justify-center gap-1";
+      const inactiveClass = "py-1.5 px-2 rounded-xl text-xs font-semibold text-slate-200 hover:text-white transition flex items-center justify-center gap-1";
       const activeClass = "py-1.5 px-2 rounded-xl text-xs font-bold bg-sky-600 text-white shadow-sm transition flex items-center justify-center gap-1";
 
       btnAcross.className = mode === 'across' ? activeClass : inactiveClass;
@@ -972,7 +972,7 @@
         if (k === corridor) {
           el.className = "bg-indigo-600 text-white px-2.5 py-1 rounded-xl text-xs font-bold shrink-0 flex items-center gap-1 shadow-sm";
         } else {
-          el.className = "bg-[var(--card)] border border-[var(--border)] px-2.5 py-1 rounded-xl text-xs font-semibold shrink-0 flex items-center gap-1";
+          el.className = "bg-black/60 backdrop-blur-md text-white border border-white/15 px-2.5 py-1 rounded-xl text-xs font-semibold shrink-0 flex items-center gap-1";
         }
       });
 
@@ -1030,18 +1030,18 @@
       document.getElementById("profileSong").textContent = p.song;
 
       document.getElementById("profileDetailsGrid").innerHTML = `
-        <div class="bg-[var(--background)] border border-[var(--border)] rounded-xl px-2.5 py-1.5 flex items-center gap-1.5">
+        <div class="bg-black/60 border border-white/15 text-white rounded-xl px-2.5 py-1.5 flex items-center gap-1.5">
           <span>🍽️</span>
           <span class="truncate"><strong>Favori:</strong> ${p.favFood}</span>
         </div>
-        <div class="bg-[var(--background)] border border-[var(--border)] rounded-xl px-2.5 py-1.5 flex items-center gap-1.5">
+        <div class="bg-black/60 border border-white/15 text-white rounded-xl px-2.5 py-1.5 flex items-center gap-1.5">
           <span>🍷</span>
           <span class="truncate">${p.drinkSmoke}</span>
         </div>
       `;
 
       document.getElementById("profileBadges").innerHTML = p.badges.map(b => 
-        `<span class="bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20 px-2.5 py-1 rounded-full text-xs font-medium">${b}</span>`
+        `<span class="bg-black/60 text-sky-300 border border-sky-400/30 px-2.5 py-1 rounded-full text-xs font-medium">${b}</span>`
       ).join("");
     }
 
@@ -1070,14 +1070,14 @@
         if (el) el.classList.add('hidden');
         const navBtn = document.getElementById('nav-' + t);
         if (navBtn) {
-          navBtn.className = "flex flex-col items-center justify-center py-1 rounded-xl text-[var(--muted-foreground)] hover:text-[var(--foreground)] font-medium transition relative";
+          navBtn.className = "flex flex-col items-center justify-center py-1 rounded-xl text-slate-200 hover:text-white font-medium transition relative";
         }
       });
 
       document.getElementById('tab-' + tabId).classList.remove('hidden');
       const activeNav = document.getElementById('nav-' + tabId);
       if (activeNav) {
-        activeNav.className = "flex flex-col items-center justify-center py-1 rounded-xl text-sky-600 dark:text-sky-400 font-bold transition relative";
+        activeNav.className = "flex flex-col items-center justify-center py-1 rounded-xl bg-white/10 text-amber-300 font-bold transition relative";
       }
       if (tabId === 'discover') renderProfile();
       document.getElementById('screenContainer').scrollTop = 0;
